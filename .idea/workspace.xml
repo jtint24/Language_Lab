@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/BuiltinFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/BuiltinValue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ExpressionFunction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Function.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/RefinementType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Type.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/UniverseType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Value.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/IO/InputBuffer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/IO/OutputBuffer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/BinaryExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ConditionalExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionContainer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionSeries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/FunctionExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/IdentityExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/InterpretationSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LambdaExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LetExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnableExpressionSeries.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/TestInterpretationSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/VariableExpression.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Associativity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/BinderTokenType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/BindingPowers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/PrecedenceLevel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/SymbolString.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Token.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Tokenizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/EventLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/MarkClosed.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/MarkOpened.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Nonterminal.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalParseTreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/ParseTreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TerminalParseTreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TreeKind.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/langlab/hello-view.fxml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2amSAGaW2eOVmxKPlinS7MQx1M5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/joshuatint/Downloads/LangLab/src/main/java/com/example/langlab",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/com/example/langlab" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.langlab.HelloApplication" />
+      <module name="LangLab" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.langlab.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.HelloApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="" />
+      <created>1704922117873</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1704922117873</updated>
+      <workItem from="1704922119142" duration="13699000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
