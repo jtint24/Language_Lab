@@ -60,13 +60,13 @@ public class Parser {
 
      TokenType nth(int lookahead) {
          if (this.fuel == 0) {
-             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser.Parser is stuck!", true));
+             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser is stuck!", true));
          }
 
          this.fuel--;
 
          if (this.pos+lookahead >= this.tokens.size()) {
-             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser.Parser has hit end!", true));
+             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser has hit end!", true));
          }
 
          TokenType retTokenType = this.tokens.get(this.pos+lookahead).getTokenType();

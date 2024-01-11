@@ -1,10 +1,11 @@
 package com.example.langlab.Parser;
 
+import com.example.langlab.Lexer.Token;
 import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
 
 public class NonterminalLibrary {
-    public static Nonterminal file = new Nonterminal("File") {
+    public static Nonterminal file = new Nonterminal("File", "A nonterminal to capture the whole program") {
         @Override
         public void parse(Parser parser) {
 
@@ -16,13 +17,13 @@ public class NonterminalLibrary {
                 //} else {
                 //    parser.advanceWithError(new Error(Error.ErrorType.PARSER_ERROR, "Expected a statement", false));
                 //}
-                fullExpression.apply(parser);
+                statement.apply(parser);
             }
 
         }
     };
 
-    static Nonterminal letStatement = new Nonterminal("Let") {
+    static Nonterminal letStatement = new Nonterminal("Let", "A nonterminal that captures a let statement") {
         @Override
         public void parse(Parser parser) {
 
@@ -36,7 +37,7 @@ public class NonterminalLibrary {
 
         }
     };
-    public static Nonterminal returnStatement = new Nonterminal("Return") {
+    public static Nonterminal returnStatement = new Nonterminal("Return", "A nonterminal that captures a return statement") {
         @Override
         public void parse(Parser parser) {
 
@@ -48,7 +49,8 @@ public class NonterminalLibrary {
         }
     };
 
-    public static Nonterminal lambda = new Nonterminal("Lambda") {
+    /*
+    public static Nonterminal lambda = new Nonterminal("Lambda", "A nonterminal that captures a lambda expression") {
         @Override
         public void parse(Parser parser) {
 
@@ -72,8 +74,9 @@ public class NonterminalLibrary {
 
         }
     };
+    */
 
-    public static Nonterminal parameterList = new Nonterminal("Parameter List") {
+    public static Nonterminal parameterList = new Nonterminal("Parameter List", "A nonterminal that captures a list of parameters to a function") {
         @Override
         public void parse (Parser parser) {
 
@@ -87,7 +90,7 @@ public class NonterminalLibrary {
         }
     };
 
-    public static Nonterminal argumentList = new Nonterminal("Argument List") {
+    public static Nonterminal argumentList = new Nonterminal("Argument List", "A nonterminal that captures a list of arguments to a function call") {
         @Override
         public void parse(Parser parser) {
 
@@ -99,61 +102,46 @@ public class NonterminalLibrary {
         }
     };
 
-    // Basic expressions: including expressions in parentheses, literals, identifiers, lambdas
-    public static Nonterminal delimitedExpression = new Nonterminal("Delimited Expression") {
+    public static Nonterminal statement = new Nonterminal("Statement", "A nonterminal that captures any statement that performs an action") {
         @Override
         public void parse(Parser parser) {
-            if (parser.at(TokenLibrary.lParen)) {
-                // parser.eat(TokenLibrary.lParen);
-                funcCallExpression.apply(parser);
-                // parser.expect(TokenLibrary.rParen);
-            } else if (parser.at(TokenLibrary.INT_TOKEN_TYPE)) {
-                parser.eat(TokenLibrary.INT_TOKEN_TYPE);
-            } else if (parser.at(TokenLibrary.stringLiteral)) {
-                parser.eat(TokenLibrary.stringLiteral);
-            } else if (parser.at(TokenLibrary.identifier)) {
-                parser.eat(TokenLibrary.identifier);
-            } else if (parser.at(TokenLibrary.lBrace)) {
-                lambda.apply(parser);
-            } else if (parser.at(TokenLibrary.let)) {
+            if (parser.at(TokenLibrary.let)) {
                 letStatement.apply(parser);
             } else if (parser.at(TokenLibrary.RETURN_TOKEN_TYPE)) {
                 returnStatement.apply(parser);
             }
             parser.eat(TokenLibrary.whitespace);
+
         }
     };
 
-
-    // Argument list in parentheses constituting a function call
-    public static Nonterminal expressionCall = new Nonterminal("Expression Call") {
+    // Basic expressions: including expressions in parentheses, literals, identifiers, lambdas
+    public static Nonterminal delimitedExpression = new Nonterminal("Delimited Expression", "A nonterminal that captures an simple expression without operators") {
         @Override
         public void parse(Parser parser) {
-            parser.expect(TokenLibrary.lParen);
+            parser.eat(TokenLibrary.whitespace);
+            if (parser.at(TokenLibrary.INT_TOKEN_TYPE)) {
+                parser.eat(TokenLibrary.INT_TOKEN_TYPE);
+            } else if (parser.at(TokenLibrary.stringLiteral)) {
+                parser.eat(TokenLibrary.stringLiteral);
+            } else if (parser.at(TokenLibrary.identifier)) {
+                parser.eat(TokenLibrary.identifier);
+            } else if (parser.at(TokenLibrary.lParen)) {
+                parser.eat(TokenLibrary.lParen);
+                fullExpression.apply(parser);
+                parser.expect(TokenLibrary.rParen);
+            }
 
-            argumentList.apply(parser);
-
-            parser.expect(TokenLibrary.rParen);
             parser.eat(TokenLibrary.whitespace);
         }
     };
 
-    // Complex expressions, including function calls
-    public static Nonterminal funcCallExpression = new Nonterminal("Function Call") {
+    public static Nonterminal expressionCall = new Nonterminal("Expression Call", "A nonterminal that captures when an expression is called like a function") {
         @Override
-        public void parse(Parser parser) {
-            MarkClosed leftSide = expressionCall.apply(parser);
-
-            if (parser.at(TokenLibrary.lParen)) {
-                // Parses function calls
-                while (parser.at(TokenLibrary.lParen)) {
-                    expressionCall.apply(parser, leftSide);
-                }
-            }
-        }
+        public void parse(Parser parser) {}
     };
 
-    public static Nonterminal fullExpression = new Nonterminal("Expression") {
+    public static Nonterminal fullExpression = new Nonterminal("Expression", "A nonterminal capturing any expression that represents a value") {
         @Override
         public void parse(Parser parser) {
             recursiveExpression(parser, TokenLibrary.eof);
@@ -161,6 +149,14 @@ public class NonterminalLibrary {
 
         public void recursiveExpression(Parser parser, TokenType leftTokenType) {
             MarkClosed lefthandSide = delimitedExpression.apply(parser);
+
+            while (parser.at(TokenLibrary.lParen)) {
+                MarkOpened opener = parser.openBefore(lefthandSide);
+                parser.expect(TokenLibrary.lParen);
+                argumentList.apply(parser);
+                parser.expect(TokenLibrary.rParen);
+                lefthandSide = parser.close(opener, TreeKind.valid(expressionCall));
+            }
             // System.out.println("Recursively parsing with left "+leftToken);
 
             // while (parser.at(TokenLibrary.lParen)) {
@@ -196,7 +192,7 @@ public class NonterminalLibrary {
         }
     };
 
-    public static Nonterminal binaryExpression = new Nonterminal("Binary Expression") {
+    public static Nonterminal binaryExpression = new Nonterminal("Binary Expression", "A nonterminal capturing expressions containing binary operators ") {
         @Override
         public void parse(Parser parser) {}
     };

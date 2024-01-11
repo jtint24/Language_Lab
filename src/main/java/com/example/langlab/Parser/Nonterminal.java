@@ -1,9 +1,14 @@
 package com.example.langlab.Parser;
 
+import javafx.scene.control.Tooltip;
+
 abstract public class Nonterminal {
     public final String name;
-    public Nonterminal(String name) {
+    public String description;
+
+    public Nonterminal(String name, String description) {
         this.name = name;
+        this.description = description;
     }
     public abstract void parse(Parser parser);
 

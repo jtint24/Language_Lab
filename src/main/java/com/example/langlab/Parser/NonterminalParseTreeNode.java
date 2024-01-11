@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -132,6 +133,10 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
                         new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY)
                 )
         );
+        if (kind.isValid) {
+            Tooltip.install(labelBox, new Tooltip(kind.validTreeType.description));
+        }
+
         labelBox.setAlignment(Pos.CENTER);
         labelBox.setMaxWidth(10*(kind.validTreeType.name.length()+2));
 
