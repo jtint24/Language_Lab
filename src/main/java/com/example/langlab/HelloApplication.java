@@ -14,9 +14,9 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,9 +43,30 @@ public class HelloApplication extends Application {
         this.stage = stage;
     }
 
-    public VBox mainView() {
-        TextField code = new TextField();
+    public Parent mainView() {
+        Tab codeTab = new Tab();
+        codeTab.setText("Code");
+        codeTab.setContent(codeView());
+        codeTab.setClosable(false);
+
+        Tab lexerTab = new Tab();
+        lexerTab.setText("Lexer");
+        lexerTab.setContent(lexView());
+        lexerTab.setClosable(false);
+
+        Tab parseTab = new Tab();
+        parseTab.setText("Parser");
+        parseTab.setContent(parseView());
+        parseTab.setClosable(false);
+
+        return new TabPane(codeTab, lexerTab, parseTab);
+    }
+
+    public VBox codeView() {
+        TextArea code = new TextArea();
         code.setText(program);
+        code.setFont(Font.font("Courier new", 16));
+
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(actionEvent -> {
             program = code.getText();
@@ -61,12 +82,13 @@ public class HelloApplication extends Application {
             stage.setScene(new Scene(mainView(), 500, 500));
         });
 
-
-        VBox mainBox = new VBox(code, submitButton, lexView(), parseView());
-
-        mainBox.setSpacing(10);
+        VBox mainBox = new VBox(code, submitButton);
+        mainBox.setAlignment(Pos.TOP_CENTER);
         mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
+
         return mainBox;
+        // mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
+        /// return mainBox;
     }
 
     public Node parseView() {
@@ -78,10 +100,14 @@ public class HelloApplication extends Application {
         mainBox.setSpacing(15);
 
         if (headPtn != null) {
-            mainBox.getChildren().add(headPtn.toNode());
+            mainBox.getChildren().add(new ScrollPane(headPtn.toNode()));
         } else {
             mainBox.getChildren().add(new Text("No Parse Tree..."));
         }
+
+        mainBox.setAlignment(Pos.TOP_CENTER);
+        mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
+
         return mainBox;
     }
 
@@ -90,20 +116,32 @@ public class HelloApplication extends Application {
         Text title = new Text("Lexemes");
         title.setFont(Font.font("Arial", 24));
 
-        FlowPane mainPane = new FlowPane();
+        VBox codeBox = new VBox();
+        FlowPane linePane = new FlowPane();
+        linePane.setHgap(10);
 
         for (Token token : lexemes.toList()) {
-            mainPane.getChildren().add(token.toNode());
+            linePane.getChildren().add(token.toNode());
+            if (token.getLexeme().contains("\n")) {
+                codeBox.getChildren().add(linePane);
+                linePane = new FlowPane();
+                linePane.setHgap(10);
+            }
         }
-        if (lexemes.toList().size() == 0) {
-            mainPane.getChildren().add(new Text("No Lexemes..."));
-        }
-        mainPane.setHgap(10);
-        mainPane.setAlignment(Pos.CENTER);
 
-        VBox mainBox = new VBox(title, mainPane);
-        mainBox.setAlignment(Pos.CENTER);
+        if (lexemes.toList().size() == 0) {
+            codeBox.getChildren().add(new Text("No Lexemes..."));
+        } else {
+            codeBox.getChildren().add(linePane);
+        }
+
+        codeBox.setSpacing(10);
+        codeBox.setAlignment(Pos.CENTER);
+
+        VBox mainBox = new VBox(title, codeBox);
+        mainBox.setAlignment(Pos.TOP_CENTER);
         mainBox.setSpacing(15);
+        mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
 
         return mainBox;
     }

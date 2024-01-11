@@ -34,7 +34,7 @@ public class Token {
 
     public Node toNode() {
         VBox mainBox = new VBox();
-        Text lexemeText = new Text(" "+lexeme+" ");
+        Text lexemeText = new Text(" "+lexeme.replace("\n", "")+" ");
         lexemeText.setFont(Font.font("Courier New", 18));
         lexemeText.setFill(tokenType.darkColor);
 
@@ -57,6 +57,8 @@ public class Token {
                     new BackgroundFill(tokenType.mainColor, new CornerRadii(5), Insets.EMPTY)
                 )
         );
+
+        mainBox.setMaxHeight(30);
 
         // mainB
         return mainBox;

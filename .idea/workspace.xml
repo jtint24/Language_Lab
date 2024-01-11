@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add parse tree view">
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add expression call parsing">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Nonterminal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Nonterminal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Token.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalParseTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalParseTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Parser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +82,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="18277000" />
+      <workItem from="1704922119142" duration="20430000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -91,7 +91,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704994497164</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add expression call parsing">
+      <created>1705000699732</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705000699732</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +106,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add parse tree view" />
-    <option name="LAST_COMMIT_MESSAGE" value="add parse tree view" />
+    <MESSAGE value="add expression call parsing" />
+    <option name="LAST_COMMIT_MESSAGE" value="add expression call parsing" />
   </component>
 </project>

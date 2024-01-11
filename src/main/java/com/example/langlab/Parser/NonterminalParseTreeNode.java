@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -111,12 +112,29 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
     }
 
     public Node toNode() {
-        HBox childBoxes = new HBox();
+
+
+        Pane childBoxes;
+        if (children.stream().anyMatch(
+                parseTreeNode -> parseTreeNode instanceof NonterminalParseTreeNode &&
+                        ((NonterminalParseTreeNode) parseTreeNode).kind.validTreeType == NonterminalLibrary.statement)
+        ) {
+            VBox vertChildren  = new VBox();
+            vertChildren.setSpacing(5);
+            vertChildren.setAlignment(Pos.CENTER);
+
+            childBoxes = vertChildren;
+        } else {
+            HBox horizChildren = new HBox();
+            horizChildren.setSpacing(5);
+            horizChildren.setAlignment(Pos.CENTER);
+
+            childBoxes = horizChildren;
+        }
+
         for (ParseTreeNode ptn : children) {
             childBoxes.getChildren().add(ptn.toNode());
         }
-        childBoxes.setSpacing(5);
-        childBoxes.setAlignment(Pos.CENTER);
 
         Text label;
         if (kind.isValid) {
