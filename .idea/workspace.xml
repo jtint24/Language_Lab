@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add better looking UI">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Type.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/DeclarationExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionSeries.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnExpression.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/VariableExpression.java" afterDir="false" />
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="start ExpressionBuilder">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Value.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueWrapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValueExpression.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TerminalParseTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TerminalParseTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +98,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="38336000" />
+      <workItem from="1704922119142" duration="39324000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -134,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705019445823</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="start ExpressionBuilder">
+      <created>1705027648198</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705027648199</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +146,7 @@
     <MESSAGE value="add expression call parsing" />
     <MESSAGE value="Add tabs to lab" />
     <MESSAGE value="add better looking UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="add better looking UI" />
+    <MESSAGE value="start ExpressionBuilder" />
+    <option name="LAST_COMMIT_MESSAGE" value="start ExpressionBuilder" />
   </component>
 </project>

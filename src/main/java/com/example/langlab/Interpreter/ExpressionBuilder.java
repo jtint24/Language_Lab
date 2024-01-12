@@ -1,6 +1,7 @@
 package com.example.langlab.Interpreter;
 
-import com.example.langlab.Parser.NonterminalLibrary;
+import com.example.langlab.Elements.ValueLibrary;
+import com.example.langlab.Elements.ValueWrapper;
 import com.example.langlab.Parser.NonterminalParseTreeNode;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.TerminalParseTreeNode;
@@ -15,6 +16,8 @@ public class ExpressionBuilder {
             switch (name) {
                 case "identifier":
                     return new VariableExpression(lexeme);
+                case "int":
+                    return buildIntExpression(lexeme);
                 default:
                     return null;
             }
@@ -37,6 +40,10 @@ public class ExpressionBuilder {
         }
 
         return null;
+    }
+
+    private static Expression buildIntExpression(String lexeme) {
+        return new ValueExpression(new ValueWrapper<Integer>(ValueLibrary.intType, Integer.parseInt(lexeme)));
     }
 
     private static Expression unwrap(NonterminalParseTreeNode ptn) {
