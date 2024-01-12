@@ -4,8 +4,8 @@ import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.ErrorManager.ErrorManager;
 import com.example.langlab.IO.InputBuffer;
 import com.example.langlab.IO.OutputBuffer;
-import com.example.langlab.Interpreter.Expression;
-import com.example.langlab.Interpreter.ExpressionBuilder;
+import com.example.langlab.Interpreter.Expressions.Expression;
+import com.example.langlab.Interpreter.Expressions.ExpressionBuilder;
 import com.example.langlab.Interpreter.ValidationContext;
 import com.example.langlab.Interpreter.ValidationNodeResult;
 import com.example.langlab.Lexer.*;
@@ -63,7 +63,9 @@ public class MainApplication extends Application {
         Tokenizer tokenizer = new Tokenizer(new InputBuffer(program, errorManager), errorManager);
         try {
             lexemes = tokenizer.extractAllSymbols();
-        } catch (RuntimeException ignored) {}
+        } catch (RuntimeException ignored) {
+            return;
+        }
         System.out.println(lexemes);
 
 
@@ -71,7 +73,9 @@ public class MainApplication extends Application {
         try {
             parser.setSymbols(lexemes.toList());
             NonterminalLibrary.file.apply(parser);
-        } catch (RuntimeException ignored) {}
+        } catch (RuntimeException ignored) {
+            return;
+        }
         headPtn = parser.buildTree();
 
 
@@ -84,7 +88,9 @@ public class MainApplication extends Application {
 
         try {
             errorManager.logErrors(validationContext.getErrors());
-        } catch (RuntimeException ignored) {}
+        } catch (RuntimeException ignored) {
+            return;
+        }
 
         errorManager.printErrors(true);
 
@@ -168,6 +174,7 @@ public class MainApplication extends Application {
         mainBox.getChildren().add(summaryBox);
         mainBox.setAlignment(Pos.TOP_CENTER);
 
+        mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
 
         return mainBox;
 
@@ -190,6 +197,7 @@ public class MainApplication extends Application {
                 new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
         ));
         mainBox.setSpacing(10);
+
 
         return mainBox;
     }

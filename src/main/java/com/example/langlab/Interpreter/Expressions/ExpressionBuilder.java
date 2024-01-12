@@ -1,11 +1,8 @@
-package com.example.langlab.Interpreter;
+package com.example.langlab.Interpreter.Expressions;
 
-import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.Elements.ValueWrapper;
 import com.example.langlab.Lexer.TokenLibrary;
-import com.example.langlab.Lexer.TokenType;
-import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.NonterminalParseTreeNode;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.TerminalParseTreeNode;

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ValidationNodeResult {
-    Node displayNode;
-    ArrayList<ErrBadge> badges;
+    public Node displayNode;
+    public ArrayList<ErrBadge> badges;
 
     public ValidationNodeResult(Node displayNode, ErrBadge... badges) {
         this.displayNode = displayNode;

@@ -1,7 +1,12 @@
-package com.example.langlab.Interpreter;
+package com.example.langlab.Interpreter.Expressions;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.Value;
+import com.example.langlab.Interpreter.ExpressionResult;
+import com.example.langlab.Interpreter.Expressions.Expression;
+import com.example.langlab.Interpreter.State;
+import com.example.langlab.Interpreter.ValidationContext;
+import com.example.langlab.Interpreter.ValidationNodeResult;
 import com.example.langlab.MainApplication;
 
 public class ValueExpression extends Expression {
@@ -12,7 +17,7 @@ public class ValueExpression extends Expression {
     }
 
     @Override
-    public State evaluate(State s) {
+    public ExpressionResult evaluate(State s) {
         return null;
     }
 

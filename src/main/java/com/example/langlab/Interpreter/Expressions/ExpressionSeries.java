@@ -1,7 +1,12 @@
-package com.example.langlab.Interpreter;
+package com.example.langlab.Interpreter.Expressions;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
+import com.example.langlab.Interpreter.ExpressionResult;
+import com.example.langlab.Interpreter.Expressions.Expression;
+import com.example.langlab.Interpreter.State;
+import com.example.langlab.Interpreter.ValidationContext;
+import com.example.langlab.Interpreter.ValidationNodeResult;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,7 +20,7 @@ public class ExpressionSeries extends Expression {
     }
 
     @Override
-    public State evaluate(State s) {
+    public ExpressionResult evaluate(State s) {
         return null;
     }
 

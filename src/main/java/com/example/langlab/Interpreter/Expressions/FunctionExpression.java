@@ -1,15 +1,15 @@
-package com.example.langlab.Interpreter;
+package com.example.langlab.Interpreter.Expressions;
 
-import com.example.langlab.Elements.Function;
 import com.example.langlab.Elements.FunctionType;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.ErrorManager.Error;
+import com.example.langlab.Interpreter.*;
+import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.MainApplication;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static com.example.langlab.Elements.ValueLibrary.voidType;
 
@@ -25,7 +25,7 @@ public class FunctionExpression extends Expression {
     }
 
     @Override
-    public State evaluate(State s) {
+    public ExpressionResult evaluate(State s) {
         return null;
     }
 

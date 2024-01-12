@@ -1,10 +1,11 @@
-package com.example.langlab.Interpreter;
+package com.example.langlab.Interpreter.Expressions;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.Error;
+import com.example.langlab.Interpreter.*;
+import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.MainApplication;
-import javafx.scene.layout.VBox;
 
 public class VariableExpression extends Expression {
     String variableName;
@@ -16,7 +17,7 @@ public class VariableExpression extends Expression {
     }
 
     @Override
-    public State evaluate(State s) {
+    public ExpressionResult evaluate(State s) {
         return null;
     }
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ValidationContext {
-    LayeredMap<String, Type> declaredVariables = new LayeredMap<>(false);
+    public LayeredMap<String, Type> declaredVariables = new LayeredMap<>(false);
 
     ArrayList<Error> errors = new ArrayList<>();
 
