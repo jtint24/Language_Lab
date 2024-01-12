@@ -2,19 +2,21 @@ package com.example.langlab.Interpreter;
 
 import javafx.scene.Node;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class ErrBadge {
+public class ErrBadge extends Pane {
     String tooltip;
     boolean pass;
     public ErrBadge(String success, String fail, boolean pass) {
         this.pass = pass;
         this.tooltip = pass ? success : fail;
+        this.getChildren().add(toNode());
     }
 
-    public Node toNode() {
+    private Node toNode() {
         Text passTxt = new Text("✓");
         Text failTxt = new Text("x");
         passTxt.setFill(Color.GREEN);

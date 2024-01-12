@@ -7,6 +7,7 @@ import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expression;
 import com.example.langlab.Interpreter.ExpressionBuilder;
 import com.example.langlab.Interpreter.ValidationContext;
+import com.example.langlab.Interpreter.ValidationNodeResult;
 import com.example.langlab.Lexer.*;
 import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
@@ -138,18 +139,20 @@ public class MainApplication extends Application {
         int totalChecks = 0;
         int checksPassed = 0;
 
+        VBox astBox = new VBox();
+        if (ast == null) {
+            astBox.getChildren().add(text("No AST..."));
+        } else {
+            ValidationNodeResult astVNR = ast.getValidationNode();
+            totalChecks = astVNR.getTotalChecks();
+            checksPassed = astVNR.getPassedChecks();
+            astBox.getChildren().add(astVNR.toNode());
+        }
 
         VBox checksSummaryBox = new VBox(
                 text(checksPassed+"/"+totalChecks, 48),
                 text("Checks Passed", 18)
         );
-
-        VBox astBox = new VBox();
-        if (ast == null) {
-            astBox.getChildren().add(text("No AST..."));
-        } else {
-            astBox.getChildren().add(ast.getValidationNode().toNode());
-        }
 
         HBox summaryBox = new HBox(astBox, checksSummaryBox);
 
@@ -160,8 +163,10 @@ public class MainApplication extends Application {
         ));
         summaryBox.setAlignment(Pos.TOP_CENTER);
         summaryBox.setSpacing(40);
+        summaryBox.setPadding(new Insets(20));
 
         mainBox.getChildren().add(summaryBox);
+        mainBox.setAlignment(Pos.TOP_CENTER);
 
 
         return mainBox;
@@ -174,7 +179,7 @@ public class MainApplication extends Application {
         code.setFont(Font.font("Courier new", 16));
         code.setMaxHeight(Double.MAX_VALUE);
 
-        Button submitButton = new Button("Submit");
+        Button submitButton = new Button("Compile");
         submitButton.setOnAction(actionEvent -> runInterpretation(code.getText()));
 
         VBox mainBox = new VBox(code, submitButton);
