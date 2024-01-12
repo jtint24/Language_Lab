@@ -21,7 +21,17 @@ public class ExpressionSeries extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        for (Expression subExpression : subExpressions) {
+            if (!s.callResults.containsKey(subExpression)) {
+                return new ExpressionResult.Failure(s, subExpression);
+            }
+        }
+
+        for (Expression subExpression : subExpressions) {
+            s.callResults.remove(subExpression);
+        }
+
+        return new ExpressionResult.Success(s, ValueLibrary.voidResult, true, false);
     }
 
     @Override

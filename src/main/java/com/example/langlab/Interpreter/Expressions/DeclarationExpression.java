@@ -20,7 +20,15 @@ public class DeclarationExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        if (s.callResults.containsKey(assignTo)) {
+            return new ExpressionResult.Failure(s, assignTo);
+        }
+
+        s.variables.put(variableName, s.callResults.get(assignTo));
+
+        s.callResults.remove(assignTo);
+
+        return new ExpressionResult.Success(s, ValueLibrary.voidResult);
     }
 
     @Override

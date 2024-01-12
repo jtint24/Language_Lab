@@ -18,7 +18,7 @@ public class VariableExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        return new ExpressionResult.Success(s, s.variables.get(variableName));
     }
 
     @Override

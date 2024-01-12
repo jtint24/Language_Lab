@@ -23,13 +23,17 @@ public class Interpreter {
         if (result instanceof ExpressionResult.Success) {
             events.add(new InterpretEvent(cursorExpression, false, ((ExpressionResult.Success) result).returnValue));
             state.callResults.put(cursorExpression, ((ExpressionResult.Success) result).returnValue);
+            System.out.println(cursorExpression+"  = "+((ExpressionResult.Success) result).returnValue);
             cursorExpression = getTopExpression();
+            // System.out.println("reopening "+cursorExpression);
         } else if (result instanceof ExpressionResult.Failure) {
             Expression nextExpression = ((ExpressionResult.Failure) result).requiredEvaluation;
             events.add(new InterpretEvent(nextExpression, true, null));
             cursorExpression = nextExpression;
+            // System.out.println("opening "+nextExpression);
         }
         state = result.state;
+        // System.out.println("now state is "+state);
     }
 
     private Expression getTopExpression() {
@@ -41,10 +45,20 @@ public class Interpreter {
                 expressionStack.remove(expressionStack.size()-1);
             }
         }
+        if (expressionStack.size() == 0) {
+            return null;
+        }
         return expressionStack.get(expressionStack.size()-1);
     }
 
-    public void run() {
+    private boolean isCompleted() {
+        InterpretEvent lastEvent = events.get(events.size()-1);
+        return !lastEvent.open && lastEvent.expr == headExpression;
+    }
 
+    public void run() {
+        while (!isCompleted()) {
+            step();
+        }
     }
 }

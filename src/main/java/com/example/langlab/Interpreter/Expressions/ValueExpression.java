@@ -18,7 +18,7 @@ public class ValueExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        return new ExpressionResult.Success(s, wrappedValue);
     }
 
     @Override

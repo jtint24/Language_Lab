@@ -6,6 +6,7 @@ import com.example.langlab.IO.InputBuffer;
 import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.Interpreter.Expressions.ExpressionBuilder;
+import com.example.langlab.Interpreter.Interpreter;
 import com.example.langlab.Interpreter.ValidationContext;
 import com.example.langlab.Interpreter.ValidationNodeResult;
 import com.example.langlab.Lexer.*;
@@ -96,6 +97,9 @@ public class MainApplication extends Application {
 
         ast = expr;
         System.out.println("Ast: \n"+expr);
+
+        Interpreter interpreter = new Interpreter(expr);
+        interpreter.run();
 
         refresh();
     }

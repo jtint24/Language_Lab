@@ -42,4 +42,5 @@ public class ValueLibrary {
     public static HashMap<String,Value> builtins = new HashMap<>() {{
         put("+", plusOperator);
     }};
+    public static Value voidResult = new VoidValue();
 }
