@@ -1,5 +1,9 @@
 package com.example.langlab.Elements;
 
-public class Value {
+public abstract class Value {
     Type type;
+
+    public Type getType() {
+        return type;
+    }
 }

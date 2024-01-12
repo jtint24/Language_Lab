@@ -1,5 +1,8 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.ValueLibrary;
+
 import java.util.ArrayList;
 
 public class ExpressionSeries extends Expression {
@@ -17,6 +20,11 @@ public class ExpressionSeries extends Expression {
     @Override
     public ValidationContext validate(ValidationContext context) {
         return null;
+    }
+
+    @Override
+    public Type getType() {
+        return ValueLibrary.voidType;
     }
 
     @Override

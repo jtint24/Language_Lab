@@ -1,4 +1,5 @@
 package com.example.langlab.Elements;
 
-public class Type {
+public abstract class Type {
+    public abstract boolean matchesValue(Value v);
 }

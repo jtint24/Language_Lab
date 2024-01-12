@@ -1,5 +1,8 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.ValueLibrary;
+
 public class DeclarationExpression extends Expression {
     String variableName;
     Expression assignTo;
@@ -17,6 +20,11 @@ public class DeclarationExpression extends Expression {
     @Override
     public ValidationContext validate(ValidationContext context) {
         return null;
+    }
+
+    @Override
+    public Type getType() {
+        return ValueLibrary.voidType;
     }
 
     @Override

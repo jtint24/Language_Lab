@@ -1,5 +1,6 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.Value;
 
 public class ValueExpression extends Expression {
@@ -17,6 +18,11 @@ public class ValueExpression extends Expression {
     @Override
     public ValidationContext validate(ValidationContext context) {
         return null;
+    }
+
+    @Override
+    public Type getType() {
+        return wrappedValue.getType();
     }
 
     @Override

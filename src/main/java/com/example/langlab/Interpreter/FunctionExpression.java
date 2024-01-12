@@ -1,14 +1,13 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Function;
 import com.example.langlab.Elements.Type;
 
-public class VariableExpression extends Expression {
-    String variableName;
-    Type type;
+import java.util.ArrayList;
 
-    public VariableExpression(String variableName) {
-        this.variableName = variableName;
-    }
+public class FunctionExpression extends Expression {
+    Function appliedFunction;
+    ArrayList<Expression> inputExpressions;
 
     @Override
     public State evaluate(State s) {
@@ -22,11 +21,6 @@ public class VariableExpression extends Expression {
 
     @Override
     public Type getType() {
-        return type;
-    }
-
-    @Override
-    public String toString() {
-        return variableName;
+        return appliedFunction.getType().getReturnType();
     }
 }

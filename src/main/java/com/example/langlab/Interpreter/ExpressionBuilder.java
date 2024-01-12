@@ -39,6 +39,9 @@ public class ExpressionBuilder {
                 case "Assignment" -> {
                     return buildAssignmentExpression((NonterminalParseTreeNode) ptn);
                 }
+                case "Binary Expression" -> {
+                    return buildBinaryExpression((NonterminalParseTreeNode) ptn);
+                }
                 case "Statement", "Expression", "Delimited Expression" -> {
                     return unwrap((NonterminalParseTreeNode) ptn);
                 }
@@ -54,6 +57,7 @@ public class ExpressionBuilder {
 
     private static Expression buildBinaryExpression(NonterminalParseTreeNode ptn) {
         String operator = ((TerminalParseTreeNode) ptn.getChildren().get(1)).getWrappedToken().getTokenType().getName();
+
         return null;
     }
 
