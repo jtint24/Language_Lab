@@ -1,7 +1,9 @@
 package com.example.langlab.Interpreter.Expressions;
 
+import com.example.langlab.Elements.Function;
 import com.example.langlab.Elements.FunctionType;
 import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.Value;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.Interpreter.*;
 import com.example.langlab.Interpreter.Expressions.Expression;
@@ -26,7 +28,30 @@ public class FunctionExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        if (!s.callResults.containsKey(appliedFunctionExpression)) {
+            return new ExpressionResult.Failure(s, appliedFunctionExpression);
+        }
+
+        for (Expression inputExpression : inputExpressions) {
+            if (!s.callResults.containsKey(inputExpression)) {
+                return new ExpressionResult.Failure(s, inputExpression);
+            }
+        }
+        Function function = (Function) s.callResults.get(appliedFunctionExpression);
+
+        Value[] inputValues = new Value[inputExpressions.size()];
+        for (int i = 0; i < inputExpressions.size(); i++) {
+            inputValues[i] = s.callResults.get(inputExpressions.get(i));
+        }
+
+        Value returnValue = function.apply(inputValues, s.errorManager);
+
+        for (Expression inputExpression : inputExpressions) {
+            s.callResults.remove(inputExpression);
+        }
+        s.callResults.remove(appliedFunctionExpression);
+
+        return new ExpressionResult.Success(s, returnValue);
     }
 
     @Override
@@ -113,5 +138,15 @@ public class FunctionExpression extends Expression {
         box.getChildren().add(MainApplication.text(")", 24));
 
         return new ValidationNodeResult(box, totalErrBadges);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder args = new StringBuilder();
+        for (Expression inputExpression : inputExpressions) {
+            args.append(", ").append(inputExpression);
+        }
+        args = new StringBuilder(args.substring(2));
+        return appliedFunctionExpression.toString()+"("+args+")";
     }
 }

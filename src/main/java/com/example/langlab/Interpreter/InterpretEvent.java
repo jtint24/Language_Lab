@@ -13,4 +13,9 @@ public class InterpretEvent {
         this.open = open;
         this.returnValue = returnValue;
     }
+
+    @Override
+    public String toString() {
+        return open ? "Open("+expr.toStringLine()+")" : "Close("+expr.toStringLine()+")";
+    }
 }

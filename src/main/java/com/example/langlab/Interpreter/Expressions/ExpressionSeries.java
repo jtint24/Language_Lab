@@ -65,4 +65,9 @@ public class ExpressionSeries extends Expression {
         }
         return ret.toString();
     }
+
+    @Override
+    public String toStringLine() {
+        return "["+subExpressions.size()+" expression(s)]";
+    }
 }

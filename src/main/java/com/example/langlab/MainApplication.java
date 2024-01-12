@@ -37,13 +37,14 @@ public class MainApplication extends Application {
     OutputBuffer out = new OutputBuffer();
     ErrorManager errorManager = new ErrorManager(out);
     ParseTreeNode headPtn;
-
+    Interpreter interpreter;
     Expression ast;
     Stage stage;
     Tab codeTab;
     Tab lexerTab;
     Tab parserTab;
     Tab semanticsTab;
+    Tab executionTab;
     @Override
     public void start(Stage stage) {
         out.silence();
@@ -98,8 +99,8 @@ public class MainApplication extends Application {
         ast = expr;
         System.out.println("Ast: \n"+expr);
 
-        Interpreter interpreter = new Interpreter(expr);
-        interpreter.run();
+        interpreter = new Interpreter(expr, errorManager);
+        // interpreter.run();
 
         refresh();
     }
@@ -108,7 +109,7 @@ public class MainApplication extends Application {
         lexerTab.setContent(lexView());
         parserTab.setContent(parseView());
         semanticsTab.setContent(semanticsView());
-
+        executionTab.setContent(executionView());
     }
 
     public Parent mainView() {
@@ -132,12 +133,81 @@ public class MainApplication extends Application {
         semanticsTab.setContent(semanticsView());
         semanticsTab.setClosable(false);
 
+        executionTab = new Tab();
+        executionTab.setText("Execution");
+        executionTab.setContent(executionView());
+        executionTab.setClosable(false);
+
         TabPane mainPane = new TabPane(codeTab, lexerTab, parserTab);
         mainPane.setBackground(new Background(
                 new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
         ));
 
-        return new TabPane(codeTab, lexerTab, parserTab, semanticsTab);
+        return new TabPane(codeTab, lexerTab, parserTab, semanticsTab, executionTab);
+    }
+
+    public Node executionView() {
+        Text title = text("Execution");
+        title.setFont(Font.font("Courier New", 24));
+        title.setFill(Color.WHITE);
+        VBox mainBox = new VBox(title);
+
+        VBox expressionBox = new VBox(text("Evaluation", 18));
+
+        if (interpreter == null) {
+            expressionBox.getChildren().add(text("No code to run..."));
+        } else {
+            VBox interpreterNode = new VBox(interpreter.toNode());
+            interpreterNode.setBackground(basic_bg);
+            interpreterNode.setPadding(new Insets(10));
+            interpreterNode.setMinWidth(stage.getWidth() * 0.47);
+            expressionBox.getChildren().add(interpreterNode);
+        }
+
+        Button runButton = new Button("Run");
+        runButton.setOnAction(actionEvent -> {
+            interpreter.run();
+            refresh();
+        });
+        Button stepButton = new Button("Step");
+        stepButton.setOnAction(actionEvent -> {
+            interpreter.step();
+            refresh();
+        });
+        Button restartButton = new Button("Restart");
+        restartButton.setOnAction(actionEvent -> {
+            System.out.println("restart ->");
+            interpreter = new Interpreter(ast, errorManager);
+            refresh();
+        });
+
+        HBox buttonsBox = new HBox();
+        if (interpreter != null) {
+            if (!interpreter.isCompleted()) {
+                buttonsBox = new HBox(restartButton, runButton, stepButton);
+            } else {
+                buttonsBox = new HBox(restartButton);
+            }
+        }
+        buttonsBox.setSpacing(10);
+        expressionBox.setSpacing(10);
+
+        expressionBox.getChildren().add(buttonsBox);
+
+        HBox fullExecutionBox = new HBox(expressionBox, new VBox());
+
+        mainBox.getChildren().add(fullExecutionBox);
+
+        mainBox.setBackground(new Background(
+                new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
+        ));
+
+        mainBox.setAlignment(Pos.TOP_CENTER);
+
+        mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));
+
+
+        return mainBox;
     }
 
     public VBox semanticsView() {

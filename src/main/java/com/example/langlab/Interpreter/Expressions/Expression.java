@@ -11,4 +11,7 @@ public abstract class Expression {
     public abstract ValidationContext validate(ValidationContext context);
     public abstract Type getType();
     public abstract ValidationNodeResult getValidationNode();
+    public String toStringLine() {
+        return toString();
+    }
 }
