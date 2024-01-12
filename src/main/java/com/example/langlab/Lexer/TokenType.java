@@ -9,14 +9,14 @@ public class TokenType {
     private final TokenValidator couldBeValid;
     private final String name;
     final Color mainColor;
-    final Color darkColor;
+    final Color highlightColor;
 
-    public TokenType(String name, TokenValidator isCurrentlyValid, TokenValidator couldBeValid, Color mainColor, Color darkColor) {
+    public TokenType(String name, TokenValidator isCurrentlyValid, TokenValidator couldBeValid, Color mainColor) {
         this.isCurrentlyValid = isCurrentlyValid;
         this.couldBeValid = couldBeValid;
         this.name = name;
         this.mainColor = mainColor;
-        this.darkColor = darkColor;
+        this.highlightColor = Color.WHITE;
     }
 
     public boolean isCurrentlyValid(String s) {
@@ -31,8 +31,8 @@ public class TokenType {
         return mainColor;
     }
 
-    public Paint getDarkColor() {
-        return darkColor;
+    public Paint getHighlightColor() {
+        return highlightColor;
     }
 
     public String getName() {
@@ -68,6 +68,6 @@ public class TokenType {
     }
 
     public BinderTokenType toBinder(BindingPowers pl) {
-        return new BinderTokenType(name, isCurrentlyValid, couldBeValid, pl, mainColor, darkColor);
+        return new BinderTokenType(name, isCurrentlyValid, couldBeValid, pl, mainColor, highlightColor);
     }
 }

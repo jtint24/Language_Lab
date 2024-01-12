@@ -5,7 +5,6 @@ import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
 import com.example.langlab.ErrorManager.Error;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -54,7 +53,7 @@ public class TerminalParseTreeNode extends ParseTreeNode {
 
         Text mainText = new Text(" "+wrappedToken.getLexeme()+" ");
         mainText.setFont(Font.font("Courier New", 18));
-        mainText.setFill(wrappedToken.getTokenType().getDarkColor());
+        mainText.setFill(wrappedToken.getTokenType().getHighlightColor());
         VBox mainBox = new VBox(mainText);
         mainBox.setBackground(new Background(
                 new BackgroundFill(wrappedToken.getTokenType().getColor(), new CornerRadii(10), Insets.EMPTY)

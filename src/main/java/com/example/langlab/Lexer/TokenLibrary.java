@@ -11,8 +11,8 @@ public class TokenLibrary {
                 INT_TOKEN_TYPE,
                 stringLiteral,
                 identifier,
-                let,
-                RETURN_TOKEN_TYPE,
+                var,
+                ret,
                 PLUS_TOKEN_TYPE,
                 equals,
                 lParen,
@@ -36,28 +36,27 @@ public class TokenLibrary {
             (String lexeme) -> {
                 return allIn(lexeme, " \t\n");
             },
-            Color.LIGHTGRAY,
-            Color.DARKGRAY
+            Color.LIGHTGRAY
     );
 
-    public static final TokenType lParen = fromString("(", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
-    public static final TokenType rParen = fromString(")", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
+    public static final TokenType lParen = fromString("(", Color.rgb(200, 100, 30)
+    );
+    public static final TokenType rParen = fromString(")", Color.rgb(200, 100, 30)
+    );
 
-    public static final TokenType lBrace = fromString("{", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
-    public static final TokenType rBrace = fromString("}", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
-    public static final TokenType lBracket = fromString("[", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
-    public static final TokenType rBracket = fromString("]", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
-    public static final TokenType arrow = fromString("->", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
+    public static final TokenType lBrace = fromString("{", Color.rgb(200, 100, 30)
+    );
+    public static final TokenType rBrace = fromString("}", Color.rgb(200, 100, 30)
+    );
+    public static final TokenType lBracket = fromString("[", Color.rgb(200, 100, 30)
+    );
+    public static final TokenType rBracket = fromString("]", Color.rgb(200, 100, 30)
+    );
+    public static final TokenType arrow = fromString("->", Color.rgb(200, 100, 30)
+    );
 
-    public static final TokenType comma = fromString(",", Color.rgb(250, 130, 30),
-            Color.rgb(160, 50, 10));
+    public static final TokenType comma = fromString(",", Color.rgb(200, 100, 30)
+    );
 
     public static final TokenType stringLiteral = new TokenType(
             "String",
@@ -79,8 +78,7 @@ public class TokenLibrary {
                 }
                 return true;
             },
-            Color.rgb(10,200,10),
-            Color.rgb(10,90,10)
+            Color.rgb(10,180,10)
     );
 
 
@@ -101,20 +99,18 @@ public class TokenLibrary {
                 }
                 return  (Character.isLetter(lexeme.charAt(0)) || lexeme.charAt(0) == '_') && (allIn(lexeme.toLowerCase(), "1234567890qwertyuiopasdfghjklzxcvbnm_"));
             },
-            Color.rgb(10, 150, 250),
-            Color.rgb(20, 20, 100)
+            Color.rgb(10, 120, 200)
     );
 
     public static final TokenType PLUS_TOKEN_TYPE = new TokenType(
-            "plus",
+            "+",
             (String lexeme) -> {
                 return lexeme.equals("+");
             },
             (String lexeme) -> {
                 return "+".contains(lexeme);
             },
-            Color.rgb(250, 130, 30),
-            Color.rgb(100, 50, 10)
+            Color.rgb(200, 100, 30)
     ).toBinder(new BindingPowers(PrecedenceLevel.ADDITION, Associativity.LEFT));
 
     private static final TokenType FLOAT_TOKEN_TYPE = new TokenType(
@@ -125,8 +121,7 @@ public class TokenLibrary {
             (String lexeme) -> {
                 return allIn(lexeme, "1234567890.") && 2 > countOf(lexeme, '.');
             },
-            Color.rgb(200, 100, 255),
-            Color.rgb(100, 50, 150)
+            Color.rgb(180, 90, 230)
     );
 
     public static final TokenType INT_TOKEN_TYPE = new TokenType(
@@ -143,8 +138,7 @@ public class TokenLibrary {
                 }
                 return (lexeme.charAt(0) == '-' || Character.isDigit(lexeme.charAt(0))) && allIn(lexeme.substring(1), "1234567890");
             },
-            Color.rgb(200, 100, 255),
-            Color.rgb(100, 50, 150)
+            Color.rgb(180, 90, 230)
     );
 
     public static final TokenType epsilon = new TokenType(
@@ -155,7 +149,6 @@ public class TokenLibrary {
             (String lexeme) -> {
                 return lexeme.length() == 0;
             },
-            Color.BLACK,
             Color.BLACK
     );
 
@@ -167,13 +160,12 @@ public class TokenLibrary {
             (String lexeme) -> {
                 return false;
             },
-            Color.BLACK,
-            Color.DARKGRAY
+            Color.BLACK
     );
 
-    public static final TokenType let = fromString("let", Color.rgb(255, 50, 50), Color.rgb(100, 10, 10));
-    public static final TokenType RETURN_TOKEN_TYPE = fromString("return", Color.rgb(255, 50, 50), Color.rgb(100, 10, 10));
-    public static final TokenType equals = fromString("=", Color.rgb(250, 130, 30), Color.rgb(100, 50, 10));
+    public static final TokenType var = fromString("var", Color.rgb(200, 180, 50));
+    public static final TokenType ret = fromString("return", Color.rgb(200, 180, 50));
+    public static final TokenType equals = fromString("=", Color.rgb(200, 100, 30));
 
 
 
@@ -199,7 +191,7 @@ public class TokenLibrary {
 
     private static boolean inKeywords(String lexeme) {
         HashSet<String> keywords = new HashSet<>() {{
-                add("let");
+                add("var");
                 add("match");
                 add("if");
                 add("else");
@@ -210,13 +202,12 @@ public class TokenLibrary {
 
     }
 
-    private static TokenType fromString(String target, Color main, Color darkMain ) {
+    private static TokenType fromString(String target, Color main ) {
         return new TokenType(
                 target,
                 target::equals,
                 target::startsWith,
-                main,
-                darkMain
+                main
         );
     }
 

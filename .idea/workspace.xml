@@ -4,17 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add expression call parsing">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" afterDir="false" />
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="Add tabs to lab">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/custom.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/BuiltinFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/BuiltinValue.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ExpressionFunction.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Function.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/RefinementType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Type.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/UniverseType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Value.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueWrapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/BinaryExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ConditionalExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionContainer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionSeries.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/FunctionExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/IdentityExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/InterpretationSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LambdaExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LetExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnableExpressionSeries.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/TestInterpretationSession.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/VariableExpression.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/BinderTokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/BinderTokenType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/Token.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalParseTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalParseTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TerminalParseTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/TerminalParseTreeNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,10 +101,14 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/com/example/langlab" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.langlab.HelloApplication" />
+    <configuration name="MainApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.langlab.MainApplication" />
       <module name="LangLab" />
       <extension name="coverage">
         <pattern>
@@ -70,7 +122,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.MainApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -82,7 +134,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="20430000" />
+      <workItem from="1704922119142" duration="33795000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -98,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705000699732</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add tabs to lab">
+      <created>1705002999920</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705002999920</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,6 +166,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add parse tree view" />
     <MESSAGE value="add expression call parsing" />
-    <option name="LAST_COMMIT_MESSAGE" value="add expression call parsing" />
+    <MESSAGE value="Add tabs to lab" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add tabs to lab" />
   </component>
 </project>

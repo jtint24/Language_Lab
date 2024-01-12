@@ -112,7 +112,12 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
     }
 
     public Node toNode() {
-
+        String name;
+        if (kind.isValid) {
+            name = " "+kind.validTreeType.name+" ";
+        } else {
+            name = " ERROR! ";
+        }
 
         Pane childBoxes;
         if (children.stream().anyMatch(
@@ -136,12 +141,7 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
             childBoxes.getChildren().add(ptn.toNode());
         }
 
-        Text label;
-        if (kind.isValid) {
-            label = new Text(" "+kind.validTreeType.name+" ");
-        } else {
-            label = new Text("ERROR!");
-        }
+        Text label = new Text(name);
 
         label.setFont(Font.font("Courier New", 18));
         HBox labelBox = new HBox(label);
@@ -156,15 +156,17 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
         }
 
         labelBox.setAlignment(Pos.CENTER);
-        labelBox.setMaxWidth(10*(kind.validTreeType.name.length()+2));
+
+        labelBox.setMaxWidth(10*(name.length()+2));
 
         VBox mainBox = new VBox(labelBox, childBoxes);
         mainBox.setAlignment(Pos.TOP_CENTER);
         mainBox.setSpacing(10);
         mainBox.setBorder(new Border(
-                new BorderStroke(Color.BLACK, BorderStrokeStyle.DOTTED, new CornerRadii(10),  BorderStroke.MEDIUM, new Insets(10))
+                new BorderStroke(Color.WHITE, BorderStrokeStyle.DOTTED, new CornerRadii(10),  BorderStroke.MEDIUM, new Insets(10))
         ));
-
+        mainBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, new CornerRadii(20), Insets.EMPTY)));
+        mainBox.setPadding(new Insets(10));
         return mainBox;
     }
 }

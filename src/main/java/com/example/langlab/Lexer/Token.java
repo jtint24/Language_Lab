@@ -7,7 +7,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
@@ -36,7 +35,7 @@ public class Token {
         VBox mainBox = new VBox();
         Text lexemeText = new Text(" "+lexeme.replace("\n", "")+" ");
         lexemeText.setFont(Font.font("Courier New", 18));
-        lexemeText.setFill(tokenType.darkColor);
+        lexemeText.setFill(tokenType.highlightColor);
 
         Text typeText;
         if (tokenType != TokenLibrary.whitespace) {
@@ -45,7 +44,7 @@ public class Token {
             typeText = new Text("");
         }
         typeText.setFont(Font.font("Courier New", 12));
-        typeText.setFill(tokenType.darkColor);
+        typeText.setFill(tokenType.highlightColor);
 
         mainBox.getChildren().add(lexemeText);
         mainBox.getChildren().add(typeText);

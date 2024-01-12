@@ -1,6 +1,5 @@
 package com.example.langlab.Parser;
 
-import com.example.langlab.Lexer.Token;
 import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
 
@@ -27,7 +26,7 @@ public class NonterminalLibrary {
         @Override
         public void parse(Parser parser) {
 
-            parser.expect(TokenLibrary.let);
+            parser.expect(TokenLibrary.var);
             parser.eat(TokenLibrary.whitespace);
             parser.expect(TokenLibrary.identifier);
             parser.eat(TokenLibrary.whitespace);
@@ -41,7 +40,7 @@ public class NonterminalLibrary {
         @Override
         public void parse(Parser parser) {
 
-            parser.expect(TokenLibrary.RETURN_TOKEN_TYPE);
+            parser.expect(TokenLibrary.ret);
             parser.eat(TokenLibrary.whitespace);
             fullExpression.apply(parser);
             parser.eat(TokenLibrary.whitespace);
@@ -105,9 +104,9 @@ public class NonterminalLibrary {
     public static Nonterminal statement = new Nonterminal("Statement", "A nonterminal that captures any statement that performs an action") {
         @Override
         public void parse(Parser parser) {
-            if (parser.at(TokenLibrary.let)) {
+            if (parser.at(TokenLibrary.var)) {
                 letStatement.apply(parser);
-            } else if (parser.at(TokenLibrary.RETURN_TOKEN_TYPE)) {
+            } else if (parser.at(TokenLibrary.ret)) {
                 returnStatement.apply(parser);
             }
             parser.eat(TokenLibrary.whitespace);

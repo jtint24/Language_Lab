@@ -60,13 +60,13 @@ public class Parser {
 
      TokenType nth(int lookahead) {
          if (this.fuel == 0) {
-             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser is stuck!", true));
+             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser is stuck at `"+tokens.get(this.pos+lookahead).getLexeme()+"`", true));
          }
 
          this.fuel--;
 
          if (this.pos+lookahead >= this.tokens.size()) {
-             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser has hit end!", true));
+             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Parser has reached the end of the file, but expected a continuation", true));
          }
 
          TokenType retTokenType = this.tokens.get(this.pos+lookahead).getTokenType();
@@ -90,10 +90,11 @@ public class Parser {
      }
 
      void expect(TokenType kind) {
-         if (this.eat(kind)) {
-             return;
+         if (tokens.get(pos).getTokenType() != kind) {
+             errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Expected token of type "+kind+", got "+this.nth(0), true));
          }
-         errorManager.logError(new Error(Error.ErrorType.PARSER_ERROR, "Expected token of type "+kind+", got "+this.nth(0), true));
+
+         this.eat(kind);
      }
 
      void advanceWithError(Error error) {

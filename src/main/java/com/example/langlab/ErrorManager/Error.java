@@ -3,7 +3,7 @@ package com.example.langlab.ErrorManager;
 public class Error {
     private final int errorLevel;
     private final String annotation;
-    private final ErrorType type;
+    final ErrorType type;
     private final boolean isFatal;
 
     public Error(ErrorType type, String annotation, boolean isFatal) {

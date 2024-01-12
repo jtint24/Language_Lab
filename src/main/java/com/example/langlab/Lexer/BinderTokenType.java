@@ -7,7 +7,7 @@ public class BinderTokenType extends TokenType {
     public int rightBindingPower;
 
     public BinderTokenType(String name, TokenValidator isCurrentlyValid, TokenValidator couldBeValid, BindingPowers precedenceLevel, Color mainColor, Color darkColor) {
-        super(name, isCurrentlyValid, couldBeValid, mainColor, darkColor);
+        super(name, isCurrentlyValid, couldBeValid, mainColor);
         leftBindingPower = precedenceLevel.leftBindingPower();
         rightBindingPower = precedenceLevel.rightBindingPower();
     }

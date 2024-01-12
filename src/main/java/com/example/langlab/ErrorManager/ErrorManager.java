@@ -40,6 +40,14 @@ public class ErrorManager {
     public boolean hasErrors() {
         return errors.size() > 0;
     }
+    public boolean hasErrors(Error.ErrorType type) {
+        for (Error error : errors) {
+            if (error.type == type) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void killSession() {
         printErrors();
@@ -64,5 +72,13 @@ public class ErrorManager {
             }
             // outputBuffer.println();
         }
+    }
+
+    public String toString() {
+        StringBuilder ret = new StringBuilder();
+        for (Error error : errors) {
+            ret.append(error.toString());
+        }
+        return ret.toString();
     }
 }
