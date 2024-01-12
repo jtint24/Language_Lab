@@ -50,7 +50,9 @@ public class AssignmentExpression extends Expression {
     @Override
     public ValidationNodeResult getValidationNode() {
         ValidationNodeResult exprVNR = toAssign.getValidationNode();
-        exprVNR.addBadge(new ErrBadge("The expression's type matched the variable's", "The expression's type did not match the variable's", typePass));
+        if (namePass) {
+            exprVNR.addBadge(new ErrBadge("The expression's type matched the variable's", "The expression's type did not match the variable's", typePass));
+        }
 
         ValidationNodeResult nameVNR = new ValidationNodeResult(MainApplication.text(variableName, 24), new ErrBadge("The variable's name exists", "The variable's name does not exist", namePass));
 

@@ -142,7 +142,7 @@ public class NonterminalLibrary {
                 parser.eat(TokenLibrary.lParen);
                 fullExpression.apply(parser);
                 parser.expect(TokenLibrary.rParen);
-            } else if (parser.at(TokenLibrary.identifier) && (parser.nth(1) == TokenLibrary.equals || (parser.nth(1) == TokenLibrary.whitespace && parser.nth(2) == TokenLibrary.equals))) {
+            } else if (parser.hasDistance(1) && parser.at(TokenLibrary.identifier) && (parser.nth(1) == TokenLibrary.equals || (parser.hasDistance(2) && parser.nth(1) == TokenLibrary.whitespace && parser.nth(2) == TokenLibrary.equals))) {
                 assignment.apply(parser);
             } else if (parser.at(TokenLibrary.identifier)) {
                 parser.eat(TokenLibrary.identifier);

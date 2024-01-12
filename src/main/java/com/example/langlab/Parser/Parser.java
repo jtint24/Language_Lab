@@ -130,4 +130,8 @@ public class Parser {
 
          return stack.pop();
      }
+
+    public boolean hasDistance(int lookahead) {
+         return lookahead+pos < tokens.size();
+    }
 }

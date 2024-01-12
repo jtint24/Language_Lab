@@ -1,5 +1,6 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.Elements.ValueWrapper;
 import com.example.langlab.Lexer.TokenLibrary;
@@ -21,6 +22,8 @@ public class ExpressionBuilder {
                     return new VariableExpression(lexeme);
                 case "int":
                     return buildIntExpression(lexeme);
+                case "+":
+                    return new VariableExpression("+");
                 default:
                     return null;
             }
@@ -56,9 +59,17 @@ public class ExpressionBuilder {
     }
 
     private static Expression buildBinaryExpression(NonterminalParseTreeNode ptn) {
-        String operator = ((TerminalParseTreeNode) ptn.getChildren().get(1)).getWrappedToken().getTokenType().getName();
+        Expression operator = convert(ptn.getChildren().get(1));
 
-        return null;
+        Expression left = convert(ptn.getChildren().get(0));
+        Expression right = convert(ptn.getChildren().get(2));
+
+        ArrayList<Expression> args = new ArrayList<>() {{
+            add(left);
+            add(right);
+        }};
+
+        return new FunctionExpression(operator, args);
     }
 
     private static Expression buildAssignmentExpression(NonterminalParseTreeNode ptn) {

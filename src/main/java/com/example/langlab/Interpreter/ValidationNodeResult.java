@@ -19,6 +19,11 @@ public class ValidationNodeResult {
         }};
     }
 
+    public ValidationNodeResult(Node displayNode, ArrayList<ErrBadge> badges) {
+        this.displayNode = displayNode;
+        this.badges = badges;
+    }
+
     public Node toNode() {
         if (badges.size() == 0) {
             return displayNode;

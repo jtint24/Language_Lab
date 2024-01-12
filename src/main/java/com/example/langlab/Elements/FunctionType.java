@@ -4,12 +4,23 @@ public class FunctionType extends Type {
     Type returnType;
     Type[] parameterTypes;
 
-    public FunctionType(String name) {
-        super(name);
+    public FunctionType(Type returnType, Type... parameterTypes) {
+        super(getTypeName(returnType, parameterTypes));
+        this.returnType = returnType;
+        this.parameterTypes = parameterTypes;
+    }
+
+    public static String getTypeName(Type returnType, Type... parameterTypes) {
+        StringBuilder body = new StringBuilder();
+        for (Type paramType : parameterTypes) {
+            body.append(", ").append(paramType.name);
+        }
+        body = new StringBuilder(body.substring(1));
+        return "("+body+")->"+returnType.name;
     }
 
     public Type getReturnType() {
-        return getReturnType();
+        return returnType;
     }
 
     public Type[] getParameterTypes() {

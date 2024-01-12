@@ -1,5 +1,10 @@
 package com.example.langlab.Elements;
 
+import com.example.langlab.ErrorManager.ErrorManager;
+import com.example.langlab.Interpreter.LayeredMap;
+
+import java.util.HashMap;
+
 public class ValueLibrary {
     public static Type intType = new Type("int") {
         @Override
@@ -23,4 +28,18 @@ public class ValueLibrary {
             return type == this;
         }
     };
+    public static Function plusOperator = new Function(new FunctionType(intType, intType, intType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager) {
+            Value leftVal = args[0];
+            Value rightVal = args[1];
+            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+
+            return new ValueWrapper<>(intType, left+right);
+        }
+    };
+    public static HashMap<String,Value> builtins = new HashMap<>() {{
+        put("+", plusOperator);
+    }};
 }

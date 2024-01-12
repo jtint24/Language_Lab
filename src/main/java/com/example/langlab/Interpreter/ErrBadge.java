@@ -17,8 +17,8 @@ public class ErrBadge {
     public Node toNode() {
         Text passTxt = new Text("✓");
         Text failTxt = new Text("x");
-        passTxt.setFill(Color.WHITE);
-        failTxt.setFill(Color.WHITE);
+        passTxt.setFill(Color.GREEN);
+        failTxt.setFill(Color.RED);
         Text a = pass ? passTxt : failTxt;
         Tooltip.install(a, new Tooltip(tooltip));
         return a;

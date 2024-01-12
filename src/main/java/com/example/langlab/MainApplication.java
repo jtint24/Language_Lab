@@ -135,15 +135,34 @@ public class MainApplication extends Application {
         title.setFill(Color.WHITE);
         VBox mainBox = new VBox(title);
 
+        int totalChecks = 0;
+        int checksPassed = 0;
+
+
+        VBox checksSummaryBox = new VBox(
+                text(checksPassed+"/"+totalChecks, 48),
+                text("Checks Passed", 18)
+        );
+
+        VBox astBox = new VBox();
         if (ast == null) {
-            mainBox.getChildren().add(text("No AST..."));
+            astBox.getChildren().add(text("No AST..."));
         } else {
-            mainBox.getChildren().add(ast.getValidationNode().toNode());
+            astBox.getChildren().add(ast.getValidationNode().toNode());
         }
+
+        HBox summaryBox = new HBox(astBox, checksSummaryBox);
+
+        summaryBox.setBackground(basic_bg);
 
         mainBox.setBackground(new Background(
                 new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
         ));
+        summaryBox.setAlignment(Pos.TOP_CENTER);
+        summaryBox.setSpacing(40);
+
+        mainBox.getChildren().add(summaryBox);
+
 
         return mainBox;
 

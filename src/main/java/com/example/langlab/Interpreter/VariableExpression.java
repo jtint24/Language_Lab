@@ -1,6 +1,7 @@
 package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.MainApplication;
 import javafx.scene.layout.VBox;
@@ -21,12 +22,16 @@ public class VariableExpression extends Expression {
 
     @Override
     public ValidationContext validate(ValidationContext context) {
-        if (context.declaredVariables.contains(variableName)) {
+        if (!context.declaredVariables.contains(variableName)) {
             context.addError(
                     new Error(Error.ErrorType.INTERPRETER_ERROR, "Can't find variable "+variableName, true, 0)
             );
+            type = ValueLibrary.voidType;
+        } else {
+            namePass = true;
+            type = context.declaredVariables.get(variableName);
+
         }
-        type = context.declaredVariables.get(variableName);
         return context;
     }
 
@@ -37,7 +42,6 @@ public class VariableExpression extends Expression {
 
     @Override
     public ValidationNodeResult getValidationNode() {
-        // TODO
         return new ValidationNodeResult(
                 MainApplication.text(variableName,24),
                 new ErrBadge("The variable name could be found", "The variable name couldn't be found", namePass)
