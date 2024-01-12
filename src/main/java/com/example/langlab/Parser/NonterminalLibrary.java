@@ -108,11 +108,26 @@ public class NonterminalLibrary {
                 varStatement.apply(parser);
             } else if (parser.at(TokenLibrary.ret)) {
                 returnStatement.apply(parser);
+            } else {
+                fullExpression.apply(parser);
             }
             parser.eat(TokenLibrary.whitespace);
 
         }
     };
+
+    public static Nonterminal assignment = new Nonterminal("Assignment", "A nonterminal that captures an assignment statement") {
+        @Override
+        public void parse(Parser parser) {
+            parser.expect(TokenLibrary.identifier);
+            parser.eat(TokenLibrary.whitespace);
+            parser.expect(TokenLibrary.equals);
+            parser.eat(TokenLibrary.whitespace);
+            fullExpression.apply(parser);
+            parser.eat(TokenLibrary.whitespace);
+        }
+    };
+
 
     // Basic expressions: including expressions in parentheses, literals, identifiers, lambdas
     public static Nonterminal delimitedExpression = new Nonterminal("Delimited Expression", "A nonterminal that captures an simple expression without operators") {
@@ -123,12 +138,14 @@ public class NonterminalLibrary {
                 parser.eat(TokenLibrary.INT_TOKEN_TYPE);
             } else if (parser.at(TokenLibrary.stringLiteral)) {
                 parser.eat(TokenLibrary.stringLiteral);
-            } else if (parser.at(TokenLibrary.identifier)) {
-                parser.eat(TokenLibrary.identifier);
             } else if (parser.at(TokenLibrary.lParen)) {
                 parser.eat(TokenLibrary.lParen);
                 fullExpression.apply(parser);
                 parser.expect(TokenLibrary.rParen);
+            } else if (parser.at(TokenLibrary.identifier) && (parser.nth(1) == TokenLibrary.equals || (parser.nth(1) == TokenLibrary.whitespace && parser.nth(2) == TokenLibrary.equals))) {
+                assignment.apply(parser);
+            } else if (parser.at(TokenLibrary.identifier)) {
+                parser.eat(TokenLibrary.identifier);
             }
 
             parser.eat(TokenLibrary.whitespace);
@@ -161,8 +178,6 @@ public class NonterminalLibrary {
             // while (parser.at(TokenLibrary.lParen)) {
             //     Parser.MarkOpened opener = parser.openBefore(lefthandSide);
             // }
-
-
 
             while (!parser.eof()) {
                 TokenType rightTokenType = parser.nth(0);

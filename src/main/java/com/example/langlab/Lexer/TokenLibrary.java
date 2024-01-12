@@ -168,7 +168,6 @@ public class TokenLibrary {
     public static final TokenType equals = fromString("=", Color.rgb(200, 100, 30));
 
 
-
     private static boolean allIn(String lexeme, String validChars) {
         for (char lexemeChar : lexeme.toCharArray()) {
             if (!validChars.contains("" + lexemeChar)) {

@@ -87,7 +87,9 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
             body.append(child.getSimplifiedHierarchyString(tabLevel + 1));
         }
         if (tabLevel == 0) {
-            body.deleteCharAt(body.length()-1);
+            if (body.length() != 0) {
+                body.deleteCharAt(body.length() - 1);
+            }
         }
         return header + body;
     }

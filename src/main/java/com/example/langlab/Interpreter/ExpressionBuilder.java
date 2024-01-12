@@ -2,6 +2,9 @@ package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.Elements.ValueWrapper;
+import com.example.langlab.Lexer.TokenLibrary;
+import com.example.langlab.Lexer.TokenType;
+import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.NonterminalParseTreeNode;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.TerminalParseTreeNode;
@@ -33,6 +36,9 @@ public class ExpressionBuilder {
                 case "File" -> {
                     return buildExpressionSeries((NonterminalParseTreeNode) ptn);
                 }
+                case "Assignment" -> {
+                    return buildAssignmentExpression((NonterminalParseTreeNode) ptn);
+                }
                 case "Statement", "Expression", "Delimited Expression" -> {
                     return unwrap((NonterminalParseTreeNode) ptn);
                 }
@@ -43,11 +49,30 @@ public class ExpressionBuilder {
     }
 
     private static Expression buildIntExpression(String lexeme) {
-        return new ValueExpression(new ValueWrapper<Integer>(ValueLibrary.intType, Integer.parseInt(lexeme)));
+        return new ValueExpression(new ValueWrapper<>(ValueLibrary.intType, Integer.parseInt(lexeme)));
+    }
+
+    private static Expression buildBinaryExpression(NonterminalParseTreeNode ptn) {
+        String operator = ((TerminalParseTreeNode) ptn.getChildren().get(1)).getWrappedToken().getTokenType().getName();
+        return null;
+    }
+
+    private static Expression buildAssignmentExpression(NonterminalParseTreeNode ptn) {
+        ArrayList<ParseTreeNode> children = ptn.getChildren();
+        ParseTreeNode nameNode = children.get(0);
+        ParseTreeNode equals = children.get(1);
+        ParseTreeNode expression = children.get(2);
+        String name = ((TerminalParseTreeNode) nameNode).getWrappedToken().getLexeme();
+
+        return new AssignmentExpression(name, convert(expression));
     }
 
     private static Expression unwrap(NonterminalParseTreeNode ptn) {
-        return convert(ptn.getChildren().get(0));
+        ParseTreeNode child = ptn.getChildren().get(0);
+        if (child instanceof TerminalParseTreeNode && ((TerminalParseTreeNode) child).getWrappedToken().getTokenType() == TokenLibrary.lParen) {
+            child = ptn.getChildren().get(1);
+        }
+        return convert(child);
     }
 
     private static Expression buildReturnExpression(NonterminalParseTreeNode ptn) {
