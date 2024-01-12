@@ -3,7 +3,6 @@ package com.example.langlab.Interpreter;
 import com.example.langlab.Elements.Function;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.ErrorManager.Error;
-import javafx.scene.Node;
 
 import java.util.ArrayList;
 
@@ -48,7 +47,7 @@ public class FunctionExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
+    public ValidationNodeResult getValidationNode() {
         // TODO
         return null;
     }

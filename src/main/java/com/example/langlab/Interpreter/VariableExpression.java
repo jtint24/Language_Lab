@@ -3,7 +3,6 @@ package com.example.langlab.Interpreter;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.MainApplication;
-import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 public class VariableExpression extends Expression {
@@ -37,9 +36,12 @@ public class VariableExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
+    public ValidationNodeResult getValidationNode() {
         // TODO
-        return new VBox(MainApplication.text(variableName), errBadge(namePass));
+        return new ValidationNodeResult(
+                MainApplication.text(variableName,24),
+                new ErrBadge("The variable name could be found", "The variable name couldn't be found", namePass)
+        );
     }
 
     @Override

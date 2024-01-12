@@ -7,7 +7,6 @@ import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expression;
 import com.example.langlab.Interpreter.ExpressionBuilder;
 import com.example.langlab.Interpreter.ValidationContext;
-import com.example.langlab.Interpreter.VariableExpression;
 import com.example.langlab.Lexer.*;
 import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
@@ -21,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -82,7 +80,10 @@ public class MainApplication extends Application {
         System.out.println(expr);
         ValidationContext validationContext = new ValidationContext();
         expr.validate(validationContext);
-        errorManager.logErrors(validationContext.getErrors());
+
+        try {
+            errorManager.logErrors(validationContext.getErrors());
+        } catch (RuntimeException ignored) {}
 
         errorManager.printErrors(true);
 
@@ -137,7 +138,7 @@ public class MainApplication extends Application {
         if (ast == null) {
             mainBox.getChildren().add(text("No AST..."));
         } else {
-            mainBox.getChildren().add(ast.toNode());
+            mainBox.getChildren().add(ast.getValidationNode().toNode());
         }
 
         mainBox.setBackground(new Background(
@@ -256,9 +257,13 @@ public class MainApplication extends Application {
     }
 
     public static Text text(String s) {
+        return text(s, 14);
+    }
+
+    public static Text text(String s, int size) {
         Text ret = new Text(s);
         ret.setFill(Color.WHITE);
-        ret.setFont(Font.font("Courier New", 14));
+        ret.setFont(Font.font("Courier New", size));
         return ret;
     }
 

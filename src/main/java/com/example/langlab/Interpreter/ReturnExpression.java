@@ -2,7 +2,8 @@ package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
-import javafx.scene.Node;
+import com.example.langlab.MainApplication;
+import javafx.scene.layout.HBox;
 
 public class ReturnExpression extends Expression {
     Expression returnedExpression;
@@ -27,9 +28,10 @@ public class ReturnExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
+    public ValidationNodeResult getValidationNode() {
+        HBox coreBox = new HBox(MainApplication.text("return ", 24), returnedExpression.getValidationNode().toNode());
         // TODO
-        return null;
+        return new ValidationNodeResult(coreBox);
     }
 
     @Override

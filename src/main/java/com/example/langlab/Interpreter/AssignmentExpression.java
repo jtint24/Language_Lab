@@ -1,10 +1,8 @@
 package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
-import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.MainApplication;
-import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -50,11 +48,14 @@ public class AssignmentExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
-        VBox varName = new VBox(MainApplication.text(variableName), errBadge(namePass));
-        VBox expressBox = new VBox(toAssign.toNode(), errBadge(typePass));
-        HBox mainBox = new HBox(varName, MainApplication.text(" = "), expressBox);
-        return mainBox;
+    public ValidationNodeResult getValidationNode() {
+        ValidationNodeResult exprVNR = toAssign.getValidationNode();
+        exprVNR.addBadge(new ErrBadge("The expression's type matched the variable's", "The expression's type did not match the variable's", typePass));
+
+        ValidationNodeResult nameVNR = new ValidationNodeResult(MainApplication.text(variableName, 24), new ErrBadge("The variable's name exists", "The variable's name does not exist", namePass));
+
+        HBox mainBox = new HBox(nameVNR.toNode(), MainApplication.text(" = ", 24), exprVNR.toNode());
+        return new ValidationNodeResult(mainBox);
     }
 
     @Override

@@ -3,7 +3,6 @@ package com.example.langlab.Interpreter;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.Value;
 import com.example.langlab.MainApplication;
-import javafx.scene.Node;
 
 public class ValueExpression extends Expression {
     Value wrappedValue;
@@ -28,8 +27,8 @@ public class ValueExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
-        return MainApplication.text(wrappedValue.toString());
+    public ValidationNodeResult getValidationNode() {
+        return new ValidationNodeResult(MainApplication.text(wrappedValue.toString(), 24));
     }
 
     @Override

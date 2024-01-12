@@ -4,8 +4,6 @@ import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.MainApplication;
-import javafx.scene.Node;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -50,9 +48,15 @@ public class DeclarationExpression extends Expression {
     }
 
     @Override
-    public Node toNode() {
-        VBox nameBox = new VBox(MainApplication.text(variableName), errBadge(namePass));
-        return new HBox(MainApplication.text("var "), nameBox, MainApplication.text(" = "), assignTo.toNode());
+    public ValidationNodeResult getValidationNode() {
+        ValidationNodeResult exprVNR = assignTo.getValidationNode();
+
+        ValidationNodeResult nameVNR = new ValidationNodeResult(
+                MainApplication.text(variableName, 24),
+                new ErrBadge("The variable name didn't already exist", "The variable name already existed!", namePass)
+        );
+
+        return new ValidationNodeResult(new HBox(MainApplication.text("var ", 24), nameVNR.toNode(), MainApplication.text(" = ", 24), exprVNR.toNode()));
     }
 
     @Override
