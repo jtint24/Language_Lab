@@ -2,6 +2,9 @@ package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,15 @@ public class ExpressionSeries extends Expression {
     @Override
     public Type getType() {
         return ValueLibrary.voidType;
+    }
+
+    @Override
+    public Node toNode() {
+        VBox stack = new VBox();
+        for (Expression subExpression : subExpressions) {
+            stack.getChildren().add(subExpression.toNode());
+        }
+        return new HBox(new VBox(), stack);
     }
 
     @Override

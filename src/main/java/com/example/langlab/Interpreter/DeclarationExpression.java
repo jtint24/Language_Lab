@@ -3,10 +3,17 @@ package com.example.langlab.Interpreter;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.Error;
+import com.example.langlab.MainApplication;
+import javafx.scene.Node;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class DeclarationExpression extends Expression {
     String variableName;
     Expression assignTo;
+
+    boolean namePass = false;
 
     public DeclarationExpression(String variableName, Expression assignTo) {
         this.variableName = variableName;
@@ -31,6 +38,7 @@ public class DeclarationExpression extends Expression {
                     )
             );
         } else {
+            namePass = true;
             context.declaredVariables.put(variableName, assignTo.getType());
         }
         return context;
@@ -39,6 +47,12 @@ public class DeclarationExpression extends Expression {
     @Override
     public Type getType() {
         return ValueLibrary.voidType;
+    }
+
+    @Override
+    public Node toNode() {
+        VBox nameBox = new VBox(MainApplication.text(variableName), errBadge(namePass));
+        return new HBox(MainApplication.text("var "), nameBox, MainApplication.text(" = "), assignTo.toNode());
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.langlab.Interpreter;
 import com.example.langlab.Elements.Function;
 import com.example.langlab.Elements.Type;
 import com.example.langlab.ErrorManager.Error;
+import javafx.scene.Node;
 
 import java.util.ArrayList;
 
@@ -44,5 +45,11 @@ public class FunctionExpression extends Expression {
     @Override
     public Type getType() {
         return appliedFunction.getType().getReturnType();
+    }
+
+    @Override
+    public Node toNode() {
+        // TODO
+        return null;
     }
 }

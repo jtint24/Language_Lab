@@ -2,10 +2,14 @@ package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.ErrorManager.Error;
+import com.example.langlab.MainApplication;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 
 public class VariableExpression extends Expression {
     String variableName;
     Type type;
+    boolean namePass;
 
     public VariableExpression(String variableName) {
         this.variableName = variableName;
@@ -30,6 +34,12 @@ public class VariableExpression extends Expression {
     @Override
     public Type getType() {
         return type;
+    }
+
+    @Override
+    public Node toNode() {
+        // TODO
+        return new VBox(MainApplication.text(variableName), errBadge(namePass));
     }
 
     @Override

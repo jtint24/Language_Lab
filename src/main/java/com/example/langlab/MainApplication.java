@@ -7,6 +7,7 @@ import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expression;
 import com.example.langlab.Interpreter.ExpressionBuilder;
 import com.example.langlab.Interpreter.ValidationContext;
+import com.example.langlab.Interpreter.VariableExpression;
 import com.example.langlab.Lexer.*;
 import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
@@ -36,6 +37,8 @@ public class MainApplication extends Application {
     OutputBuffer out = new OutputBuffer();
     ErrorManager errorManager = new ErrorManager(out);
     ParseTreeNode headPtn;
+
+    Expression ast;
     Stage stage;
     Tab codeTab;
     Tab lexerTab;
@@ -56,6 +59,7 @@ public class MainApplication extends Application {
         errorManager = new ErrorManager(out);
         lexemes = new SymbolString();
         headPtn = null;
+        ast = null;
 
         Tokenizer tokenizer = new Tokenizer(new InputBuffer(program, errorManager), errorManager);
         try {
@@ -82,12 +86,16 @@ public class MainApplication extends Application {
 
         errorManager.printErrors(true);
 
+        ast = expr;
+        System.out.println("Ast: \n"+expr);
+
         refresh();
     }
 
     public void refresh() {
         lexerTab.setContent(lexView());
         parserTab.setContent(parseView());
+        semanticsTab.setContent(semanticsView());
 
     }
 
@@ -107,12 +115,37 @@ public class MainApplication extends Application {
         parserTab.setContent(parseView());
         parserTab.setClosable(false);
 
+        semanticsTab = new Tab();
+        semanticsTab.setText("Semantics");
+        semanticsTab.setContent(semanticsView());
+        semanticsTab.setClosable(false);
+
         TabPane mainPane = new TabPane(codeTab, lexerTab, parserTab);
         mainPane.setBackground(new Background(
                 new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
         ));
 
-        return new TabPane(codeTab, lexerTab, parserTab);
+        return new TabPane(codeTab, lexerTab, parserTab, semanticsTab);
+    }
+
+    public VBox semanticsView() {
+        Text title = text("Semantics");
+        title.setFont(Font.font("Courier New", 24));
+        title.setFill(Color.WHITE);
+        VBox mainBox = new VBox(title);
+
+        if (ast == null) {
+            mainBox.getChildren().add(text("No AST..."));
+        } else {
+            mainBox.getChildren().add(ast.toNode());
+        }
+
+        mainBox.setBackground(new Background(
+                new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
+        ));
+
+        return mainBox;
+
     }
 
     public VBox codeView() {
@@ -222,7 +255,7 @@ public class MainApplication extends Application {
         return mainBox;
     }
 
-    public Text text(String s) {
+    public static Text text(String s) {
         Text ret = new Text(s);
         ret.setFill(Color.WHITE);
         ret.setFont(Font.font("Courier New", 14));

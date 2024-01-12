@@ -2,6 +2,7 @@ package com.example.langlab.Interpreter;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.ValueLibrary;
+import javafx.scene.Node;
 
 public class ReturnExpression extends Expression {
     Expression returnedExpression;
@@ -23,6 +24,12 @@ public class ReturnExpression extends Expression {
     @Override
     public Type getType() {
         return ValueLibrary.voidType;
+    }
+
+    @Override
+    public Node toNode() {
+        // TODO
+        return null;
     }
 
     @Override
