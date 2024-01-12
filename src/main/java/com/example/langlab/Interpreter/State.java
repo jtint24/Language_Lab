@@ -18,5 +18,6 @@ public class State {
         for (Map.Entry<String, Value> builtin : ValueLibrary.builtins.entrySet()) {
             variables.put(builtin.getKey(), builtin.getValue());
         }
+        this.errorManager = errorManager;
     }
 }

@@ -20,7 +20,7 @@ public class DeclarationExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        if (s.callResults.containsKey(assignTo)) {
+        if (!s.callResults.containsKey(assignTo)) {
             return new ExpressionResult.Failure(s, assignTo);
         }
 

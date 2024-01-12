@@ -157,7 +157,7 @@ public class MainApplication extends Application {
         if (interpreter == null) {
             expressionBox.getChildren().add(text("No code to run..."));
         } else {
-            VBox interpreterNode = new VBox(interpreter.toNode());
+            VBox interpreterNode = new VBox(new ScrollPane(interpreter.toNode()));
             interpreterNode.setBackground(basic_bg);
             interpreterNode.setPadding(new Insets(10));
             interpreterNode.setMinWidth(stage.getWidth() * 0.47);

@@ -15,7 +15,7 @@ abstract public class Function extends Value {
         }
         for (int i = 0; i<args.length; i++) {
             if (!type.parameterTypes[i].matchesValue(args[i])) {
-                errorManager.logError(new Error(Error.ErrorType.RUNTIME_ERROR, "Expected "+ type.parameterTypes[i] +", got"+args[i].type, true, 0));
+                errorManager.logError(new Error(Error.ErrorType.RUNTIME_ERROR, "Expected "+ type.parameterTypes[i] +", got "+args[i].type, true, 0));
             }
         }
         Value result = prevalidatedApply(args, errorManager);
@@ -30,6 +30,11 @@ abstract public class Function extends Value {
     @Override
     public FunctionType getType() {
         return type;
+    }
+
+    @Override
+    public String toString() {
+        return "<Function>";
     }
 
 }

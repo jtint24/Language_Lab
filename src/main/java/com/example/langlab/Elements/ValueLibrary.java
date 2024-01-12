@@ -9,7 +9,7 @@ public class ValueLibrary {
     public static Type intType = new Type("int") {
         @Override
         public boolean matchesValue(Value v) {
-            return false;
+            return v instanceof ValueWrapper && (((ValueWrapper<?>) v).wrappedValue) instanceof Integer;
         }
 
         @Override
@@ -28,7 +28,7 @@ public class ValueLibrary {
             return type == this;
         }
     };
-    public static Function plusOperator = new Function(new FunctionType(intType, intType, intType)) {
+    public static Function plusOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager) {
             Value leftVal = args[0];

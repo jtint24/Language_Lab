@@ -1,9 +1,6 @@
 package com.example.langlab.Interpreter.Expressions;
 
-import com.example.langlab.Elements.Function;
-import com.example.langlab.Elements.FunctionType;
-import com.example.langlab.Elements.Type;
-import com.example.langlab.Elements.Value;
+import com.example.langlab.Elements.*;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.Interpreter.*;
 import com.example.langlab.Interpreter.Expressions.Expression;
@@ -121,32 +118,41 @@ public class FunctionExpression extends Expression {
 
         ValidationNodeResult funcVNR = appliedFunctionExpression.getValidationNode();
         totalErrBadges.addAll(funcVNR.badges);
+        HBox box;
 
-        HBox box = new HBox(funcVNR.displayNode, MainApplication.text("(",24));
+        if (type instanceof BinaryOpFunctionType) {
+            box = new HBox(argNodes.get(0), funcVNR.displayNode, argNodes.get(1));
+        } else {
+            box = new HBox(funcVNR.displayNode, MainApplication.text("(", 24));
 
-        for (Node argNode : argNodes) {
-            box.getChildren().add(
-                    MainApplication.text(", ", 24)
-            );
-            box.getChildren().add(
-                    argNode
-            );
+            for (Node argNode : argNodes) {
+                box.getChildren().add(
+                        MainApplication.text(", ", 24)
+                );
+                box.getChildren().add(
+                        argNode
+                );
+            }
+
+            box.getChildren().remove(2);
+
+            box.getChildren().add(MainApplication.text(")", 24));
         }
-
-        box.getChildren().remove(2);
-
-        box.getChildren().add(MainApplication.text(")", 24));
 
         return new ValidationNodeResult(box, totalErrBadges);
     }
 
     @Override
     public String toString() {
-        StringBuilder args = new StringBuilder();
-        for (Expression inputExpression : inputExpressions) {
-            args.append(", ").append(inputExpression);
+        if (type instanceof BinaryOpFunctionType) {
+            return inputExpressions.get(0).toString()+appliedFunctionExpression+inputExpressions.get(1);
+        } else {
+            StringBuilder args = new StringBuilder();
+            for (Expression inputExpression : inputExpressions) {
+                args.append(", ").append(inputExpression);
+            }
+            args = new StringBuilder(args.substring(2));
+            return appliedFunctionExpression.toString() + "(" + args + ")";
         }
-        args = new StringBuilder(args.substring(2));
-        return appliedFunctionExpression.toString()+"("+args+")";
     }
 }
