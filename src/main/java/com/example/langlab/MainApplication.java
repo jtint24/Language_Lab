@@ -4,9 +4,9 @@ import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.ErrorManager.ErrorManager;
 import com.example.langlab.IO.InputBuffer;
 import com.example.langlab.IO.OutputBuffer;
-import com.example.langlab.Lexer.SymbolString;
-import com.example.langlab.Lexer.Token;
-import com.example.langlab.Lexer.Tokenizer;
+import com.example.langlab.Interpreter.Expression;
+import com.example.langlab.Interpreter.ExpressionBuilder;
+import com.example.langlab.Lexer.*;
 import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.Parser;
@@ -39,6 +39,7 @@ public class MainApplication extends Application {
     Tab codeTab;
     Tab lexerTab;
     Tab parserTab;
+    Tab semanticsTab;
     @Override
     public void start(Stage stage) {
         out.silence();
@@ -68,6 +69,12 @@ public class MainApplication extends Application {
             NonterminalLibrary.file.apply(parser);
         } catch (RuntimeException ignored) {}
         headPtn = parser.buildTree();
+
+
+        headPtn.removeSymbolsOfType(TokenLibrary.whitespace);
+        System.out.println(headPtn);
+        Expression expr = ExpressionBuilder.convert(headPtn);
+        System.out.println(expr);
 
         refresh();
     }

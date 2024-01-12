@@ -22,7 +22,7 @@ public class NonterminalLibrary {
         }
     };
 
-    static Nonterminal letStatement = new Nonterminal("Let", "A nonterminal that captures a let statement") {
+    static Nonterminal varStatement = new Nonterminal("Var", "A nonterminal that captures a var statement") {
         @Override
         public void parse(Parser parser) {
 
@@ -105,7 +105,7 @@ public class NonterminalLibrary {
         @Override
         public void parse(Parser parser) {
             if (parser.at(TokenLibrary.var)) {
-                letStatement.apply(parser);
+                varStatement.apply(parser);
             } else if (parser.at(TokenLibrary.ret)) {
                 returnStatement.apply(parser);
             }

@@ -60,7 +60,7 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
                     newChildren.add(child);
                 }
             } else if (child instanceof NonterminalParseTreeNode) {
-                // child.removeSymbolsOfType(t);
+                child.removeSymbolsOfType(t);
                 newChildren.add(child);
             }
         }

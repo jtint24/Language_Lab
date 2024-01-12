@@ -22,7 +22,7 @@ public class TerminalParseTreeNode extends ParseTreeNode {
         this.wrappedToken = wrappedToken;
     }
 
-    public Token getWrappedSymbol() {
+    public Token getWrappedToken() {
         return wrappedToken;
     }
     @Override
