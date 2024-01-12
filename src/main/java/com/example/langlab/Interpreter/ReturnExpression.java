@@ -16,6 +16,7 @@ public class ReturnExpression extends Expression {
 
     @Override
     public ValidationContext validate(ValidationContext context) {
+        // TODO: Validate type from context
         return null;
     }
 

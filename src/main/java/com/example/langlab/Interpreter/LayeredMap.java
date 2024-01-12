@@ -39,4 +39,13 @@ public class LayeredMap<T, U> {
     public void put(T key, U value) {
         layers.get(0).put(key, value);
     }
+
+    public boolean contains(T key) {
+        for (HashMap<T, U> layer : layers) {
+            if (layer.containsKey(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

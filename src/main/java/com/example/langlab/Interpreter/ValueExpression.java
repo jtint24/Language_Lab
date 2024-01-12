@@ -17,7 +17,7 @@ public class ValueExpression extends Expression {
 
     @Override
     public ValidationContext validate(ValidationContext context) {
-        return null;
+        return context;
     }
 
     @Override

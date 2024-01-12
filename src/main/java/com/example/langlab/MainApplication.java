@@ -6,6 +6,7 @@ import com.example.langlab.IO.InputBuffer;
 import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expression;
 import com.example.langlab.Interpreter.ExpressionBuilder;
+import com.example.langlab.Interpreter.ValidationContext;
 import com.example.langlab.Lexer.*;
 import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
@@ -75,6 +76,11 @@ public class MainApplication extends Application {
         System.out.println(headPtn);
         Expression expr = ExpressionBuilder.convert(headPtn);
         System.out.println(expr);
+        ValidationContext validationContext = new ValidationContext();
+        expr.validate(validationContext);
+        errorManager.logErrors(validationContext.getErrors());
+
+        errorManager.printErrors(true);
 
         refresh();
     }

@@ -1,5 +1,7 @@
 package com.example.langlab.ErrorManager;
 
+import com.example.langlab.Elements.Type;
+
 public class Error {
     private final int errorLevel;
     private final String annotation;
@@ -18,6 +20,15 @@ public class Error {
         this.type = type;
         this.errorLevel = errorLevel;
         this.isFatal = isFatal;
+    }
+
+    public static Error typeMismatch(Type type, Type type1) {
+        return new Error(
+                ErrorType.INTERPRETER_ERROR,
+                "Expected expression of type "+type+", received type "+type1,
+                true,
+                0
+        );
     }
 
     public boolean getIsFatal() {

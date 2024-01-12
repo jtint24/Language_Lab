@@ -6,7 +6,7 @@ import com.example.langlab.Elements.ValueLibrary;
 import java.util.ArrayList;
 
 public class ExpressionSeries extends Expression {
-    ArrayList<Expression> subExpressions = new ArrayList<>();
+    ArrayList<Expression> subExpressions;
 
     ExpressionSeries(ArrayList<Expression> subExpressions) {
         this.subExpressions = subExpressions;
@@ -19,7 +19,11 @@ public class ExpressionSeries extends Expression {
 
     @Override
     public ValidationContext validate(ValidationContext context) {
-        return null;
+        for (Expression subExpression : subExpressions) {
+            context = subExpression.validate(context);
+        }
+
+        return context;
     }
 
     @Override

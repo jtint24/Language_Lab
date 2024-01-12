@@ -4,15 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add assignment">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Function.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/FunctionExpression.java" afterDir="false" />
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add Function">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Value.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/Value.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/AssignmentExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/AssignmentExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/DeclarationExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/DeclarationExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionSeries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ExpressionSeries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/FunctionExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/FunctionExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ReturnExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValidationContext.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValueExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/ValueExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/VariableExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/VariableExpression.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +108,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="44717000" />
+      <workItem from="1704922119142" duration="46925000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -151,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705032576920</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add Function">
+      <created>1705034209544</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1705034209544</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +180,7 @@
     <MESSAGE value="start ExpressionBuilder" />
     <MESSAGE value="add Values and ValueWrappers" />
     <MESSAGE value="add assignment" />
-    <option name="LAST_COMMIT_MESSAGE" value="add assignment" />
+    <MESSAGE value="add Function" />
+    <option name="LAST_COMMIT_MESSAGE" value="add Function" />
   </component>
 </project>

@@ -8,15 +8,10 @@ import java.util.List;
 
 public class ErrorManager {
     ArrayList<Error> errors = new ArrayList<>();
-    boolean suppress = false;
     OutputBuffer outputBuffer;
 
     public ErrorManager(OutputBuffer outputBuffer) {
-        this(outputBuffer, false);
-    }
-    public ErrorManager(OutputBuffer outputBuffer, boolean suppress) {
         this.outputBuffer = outputBuffer;
-        this.suppress = suppress;
     }
 
     public void logError(Error e) {
@@ -62,9 +57,6 @@ public class ErrorManager {
     public void printErrors(boolean terse) {
         // If terse is set to true, the stack traces won't be printed
 
-        if (suppress) {
-            return;
-        }
         for (Error error : errors) {
             outputBuffer.println(error);
             if (!terse) {
@@ -72,6 +64,7 @@ public class ErrorManager {
             }
             // outputBuffer.println();
         }
+        System.out.println(outputBuffer);
     }
 
     public String toString() {
