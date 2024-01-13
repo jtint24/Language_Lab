@@ -83,7 +83,17 @@ public class Interpreter {
         VBox lines = new VBox();
         VBox results = new VBox();
         int indent = 1;
-        for (InterpretEvent interpretEvent : events) {
+        for (int i = 0; i<events.size(); i++) {
+            InterpretEvent interpretEvent = events.get(i);
+            if (i+1<events.size() && events.get(i+1).open != interpretEvent.open && events.get(i+1).expr == interpretEvent.expr) {
+                if (interpretEvent.open) {
+                    indent++;
+                } else {
+                    indent--;
+                }
+                continue;
+            }
+
             System.out.println(interpretEvent);
             Text label;
             Text result = MainApplication.text("");

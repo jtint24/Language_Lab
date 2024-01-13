@@ -1,5 +1,4 @@
 
- - [ ] Menus and UI
-  - [ ] Make the tabs grey out when you handle errors
-  - [ ] Add insets to everything
- - [ ] Add the interpreter
+ - [ ] Make the tabs grey out when you handle errors
+ - [ ] Add the four basic operators
+ - [x] Make the interpreter collapse consecutive openers/closers into one line

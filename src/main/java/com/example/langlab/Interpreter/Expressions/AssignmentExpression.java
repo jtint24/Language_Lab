@@ -1,6 +1,7 @@
 package com.example.langlab.Interpreter.Expressions;
 
 import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.Value;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.Interpreter.*;
 import com.example.langlab.MainApplication;
@@ -20,7 +21,13 @@ public class AssignmentExpression extends Expression {
 
     @Override
     public ExpressionResult evaluate(State s) {
-        return null;
+        if (!s.callResults.containsKey(toAssign)) {
+            return new ExpressionResult.Failure(s, toAssign);
+        }
+        Value returnVal = s.callResults.get(toAssign);
+        s.variables.put(variableName, returnVal);
+        s.callResults.remove(toAssign);
+        return new ExpressionResult.Success(s, returnVal);
     }
 
     @Override
