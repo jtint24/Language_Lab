@@ -120,4 +120,8 @@ public class Interpreter {
 
         return mainBox;
     }
+
+    public State getState() {
+        return state;
+    }
 }

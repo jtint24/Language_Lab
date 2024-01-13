@@ -1,5 +1,7 @@
 package com.example.langlab;
 
+import com.example.langlab.Elements.Type;
+import com.example.langlab.Elements.Value;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.ErrorManager.ErrorManager;
 import com.example.langlab.IO.InputBuffer;
@@ -7,6 +9,7 @@ import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.Interpreter.Expressions.ExpressionBuilder;
 import com.example.langlab.Interpreter.Interpreter;
+import com.example.langlab.Interpreter.State;
 import com.example.langlab.Interpreter.ValidationContext;
 import com.example.langlab.Interpreter.ValidationNodeResult;
 import com.example.langlab.Lexer.*;
@@ -14,18 +17,21 @@ import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.Parser;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -210,7 +216,10 @@ public class MainApplication extends Application {
         VBox expressionBox = new VBox(text("Evaluation", 18));
 
         if (interpreter == null) {
-            expressionBox.getChildren().add(text("No code to run..."));
+            VBox errorText = new VBox(text("No code to run..."));
+            errorText.setBackground(basic_bg);
+            errorText.setPadding(new Insets(20));
+            expressionBox.getChildren().add(errorText);
         } else {
             ScrollPane interpreterScroller = new ScrollPane(interpreter.toNode());
             interpreterScroller.setVvalue(1.0);
@@ -251,7 +260,55 @@ public class MainApplication extends Application {
 
         expressionBox.getChildren().add(buttonsBox);
 
-        HBox fullExecutionBox = new HBox(expressionBox, new VBox());
+        TableColumn<State.MemoryEntry, String> nameColumn = new TableColumn<>("Variable");
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("variable"));
+        nameColumn.setMinWidth(115);
+        nameColumn.setSortType(TableColumn.SortType.DESCENDING);
+
+        TableColumn<State.MemoryEntry, Value> valueColumn = new TableColumn<>("Value");
+        valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        valueColumn.setMinWidth(120);
+
+        TableColumn<State.MemoryEntry, Type> typeColumn = new TableColumn<>("Type");
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        typeColumn.setMinWidth(125);
+
+        TableView<State.MemoryEntry> memoryTable = new TableView<>();
+        memoryTable.getColumns().add(nameColumn);
+        memoryTable.getColumns().add(valueColumn);
+        memoryTable.getColumns().add(typeColumn);
+        if (stage != null) {
+            // memoryTable.setMinWidth(stage.getWidth() * 0.4);
+            memoryTable.setMaxHeight(stage.getHeight() * 0.47);
+        }
+
+        if (interpreter != null) {
+            System.out.println(Arrays.toString(interpreter.getState().getMemoryEntries().toArray()));
+            memoryTable.setItems(FXCollections.observableArrayList(interpreter.getState().getMemoryEntries()));
+        }
+
+        HBox fullExecutionBox = new HBox(expressionBox);
+        fullExecutionBox.setSpacing(20);
+
+        VBox consoleBox = new VBox();
+        if (interpreter != null) {
+            Text consoleText = text(out.toString());
+            consoleBox.getChildren().add(consoleText);
+            consoleBox.setMinHeight(stage.getHeight() * .35);
+        }
+
+        VBox sidebarBox = new VBox(text("Console", 18), consoleBox);
+
+        if (interpreter != null && interpreter.getState().getMemoryEntries().size() > 0) {
+            sidebarBox.getChildren().add(memoryTable);
+        }
+
+        sidebarBox.setBackground(basic_bg);
+        sidebarBox.setPadding(new Insets(10));
+
+        fullExecutionBox.getChildren().add(sidebarBox);
+
+
 
         mainBox.getChildren().add(fullExecutionBox);
 
@@ -351,7 +408,10 @@ public class MainApplication extends Application {
 
             mainBox.getChildren().add(scroll);
         } else {
-            mainBox.getChildren().add(text("No Parse Tree..."));
+            VBox errorText = new VBox(text("No Parse Tree..."));
+            errorText.setBackground(basic_bg);
+            errorText.setPadding(new Insets(20));
+            mainBox.getChildren().add(errorText);
         }
 
         if (errorManager.hasErrors(Error.ErrorType.PARSER_ERROR)) {

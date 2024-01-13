@@ -1,5 +1,7 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Value;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,5 +49,13 @@ public class LayeredMap<T, U> {
             }
         }
         return false;
+    }
+
+    public HashMap<T, U> toHashMap() {
+        HashMap<T, U> retMap = new HashMap<>();
+        for (HashMap<T, U> layer : layers) {
+            retMap.putAll(layer);
+        }
+        return retMap;
     }
 }

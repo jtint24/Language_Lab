@@ -15,7 +15,7 @@ public class FunctionType extends Type {
         for (Type paramType : parameterTypes) {
             body.append(", ").append(paramType.name);
         }
-        body = new StringBuilder(body.substring(1));
+        body = new StringBuilder(body.substring(2));
         return "("+body+")->"+returnType.name;
     }
 
