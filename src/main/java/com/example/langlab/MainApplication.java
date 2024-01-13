@@ -2,6 +2,8 @@ package com.example.langlab;
 
 import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.Value;
+import com.example.langlab.Elements.ValueLibrary;
+import com.example.langlab.Elements.ValueWrapper;
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.ErrorManager.ErrorManager;
 import com.example.langlab.IO.InputBuffer;
@@ -31,6 +33,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -77,7 +80,7 @@ public class MainApplication extends Application {
         try {
             lexemes = tokenizer.extractAllSymbols();
         } catch (Exception ignored) {
-            System.out.println("Caught exception");
+            // System.out.println("Caught exception");
             refresh(false);
             return;
         }
@@ -98,7 +101,7 @@ public class MainApplication extends Application {
         headPtn.removeSymbolsOfType(TokenLibrary.whitespace);
         System.out.println(headPtn);
         Expression expr = ExpressionBuilder.convert(headPtn);
-        System.out.println(expr);
+        // System.out.println(expr);
         ValidationContext validationContext = new ValidationContext();
         expr.validate(validationContext);
 
@@ -113,7 +116,7 @@ public class MainApplication extends Application {
 
         errorManager.printErrors(true);
 
-        System.out.println("Ast: \n"+expr);
+        // System.out.println("Ast: \n"+expr);
 
         interpreter = new Interpreter(expr, errorManager, out);
         // interpreter.run();
@@ -284,10 +287,15 @@ public class MainApplication extends Application {
             memoryTable.setMaxHeight(stage.getHeight() * 0.47);
         }
 
+        ArrayList<State.MemoryEntry> memoryEntries = new ArrayList<>();
         if (interpreter != null) {
-            System.out.println(Arrays.toString(interpreter.getState().getMemoryEntries().toArray()));
-            memoryTable.setItems(FXCollections.observableArrayList(interpreter.getState().getMemoryEntries()));
+            // System.out.println(Arrays.toString(interpreter.getState().getMemoryEntries().toArray()));
+            memoryEntries = interpreter.getState().getMemoryEntries();
         }
+        memoryEntries.add(new State.MemoryEntry("", new ValueWrapper<>(ValueLibrary.blankType, "")));
+        memoryTable.setItems(FXCollections.observableArrayList(memoryEntries));
+
+
 
         HBox fullExecutionBox = new HBox(expressionBox);
         fullExecutionBox.setSpacing(20);
@@ -301,9 +309,7 @@ public class MainApplication extends Application {
 
         VBox sidebarBox = new VBox(text("Console", 18), consoleBox);
 
-        if (interpreter != null && interpreter.getState().getMemoryEntries().size() > 0) {
-            sidebarBox.getChildren().add(memoryTable);
-        }
+        sidebarBox.getChildren().add(memoryTable);
 
         sidebarBox.setBackground(basic_bg);
         sidebarBox.setPadding(new Insets(10));

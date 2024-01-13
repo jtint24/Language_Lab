@@ -1,6 +1,6 @@
 
  - [ ] Add the four basic operators
- - [ ] Add a visual separator or highlight to the lines in the execution view
+ - [x] Add a visual separator or highlight to the lines in the execution view
  - [x] Add interpreter sidebar with console and memory
  - [x] Add print function
  - [x] Add background to fail screen on parser and execution tabs

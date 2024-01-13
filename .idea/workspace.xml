@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add print function">
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add function type conditions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/FunctionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/IO/OutputBuffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/IO/OutputBuffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +102,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="93400000" />
+      <workItem from="1704922119142" duration="100431000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -247,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705121708076</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add function type conditions">
+      <created>1705122466054</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1705122466055</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -286,6 +297,7 @@
     <MESSAGE value="add error handling to tab styling" />
     <MESSAGE value="add console/memory sidebar" />
     <MESSAGE value="add print function" />
-    <option name="LAST_COMMIT_MESSAGE" value="add print function" />
+    <MESSAGE value="add function type conditions" />
+    <option name="LAST_COMMIT_MESSAGE" value="add function type conditions" />
   </component>
 </project>

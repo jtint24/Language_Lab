@@ -22,13 +22,14 @@ public class State {
         for (Map.Entry<String, Value> builtin : ValueLibrary.builtins.entrySet()) {
             variables.put(builtin.getKey(), builtin.getValue());
         }
+        variables.addLayer();
         this.errorManager = errorManager;
         this.outputBuffer = outputBuffer;
     }
 
     public ArrayList<MemoryEntry> getMemoryEntries() {
         ArrayList<MemoryEntry> memoryEntries = new ArrayList<>();
-        for (Map.Entry<String, Value> entry : variables.toHashMap().entrySet()) {
+        for (Map.Entry<String, Value> entry : variables.toHashMap(1).entrySet()) {
             memoryEntries.add(new MemoryEntry(entry.getKey(), entry.getValue()));
         }
         return memoryEntries;

@@ -70,4 +70,15 @@ public class ValueLibrary {
         put("print", printFunction);
     }};
     public static Value voidResult = new VoidValue();
+    public static Type blankType = new Type("") {
+        @Override
+        public boolean matchesValue(Value v) {
+            return false;
+        }
+
+        @Override
+        public boolean subTypeOf(Type type) {
+            return false;
+        }
+    };
 }

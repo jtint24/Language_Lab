@@ -1,17 +1,23 @@
 package com.example.langlab.Interpreter;
 
+import com.example.langlab.Elements.Function;
 import com.example.langlab.ErrorManager.ErrorManager;
 import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.MainApplication;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Interpreter {
     Expression headExpression;
@@ -97,7 +103,7 @@ public class Interpreter {
                 continue;
             }
 
-            System.out.println(interpretEvent);
+            // System.out.println(interpretEvent);
             Text label;
             Text result = MainApplication.text("");
 
@@ -106,13 +112,33 @@ public class Interpreter {
             } else {
                 indent--;
                 label = MainApplication.text(" ".repeat(indent)+interpretEvent.expr.toStringLine(), 18);
-                result = MainApplication.text("= "+interpretEvent.returnValue);
+                result = MainApplication.text("= "+interpretEvent.returnValue+" ");
             }
 
             result.setFont(Font.font("Courier new", FontPosture.ITALIC, 18));
 
-            lines.getChildren().add(label);
-            results.getChildren().add(result);
+            HBox labelBox = new HBox(label);
+            HBox resultBox = new HBox(result);
+            
+            EventHandler<MouseEvent> highlight = actionEvent -> {
+                labelBox.setBackground(new Background(new BackgroundFill(Color.rgb(31,31,31), new CornerRadii(3,0,0,3, false), Insets.EMPTY)));
+                resultBox.setBackground(new Background(new BackgroundFill(Color.rgb(31,31,31), new CornerRadii(0,3,3,0,false), Insets.EMPTY)));
+                // labelBox.setPadding(new Insets(10));
+                // resultBox.setPadding(new Insets(10));
+            };
+            EventHandler<MouseEvent> dehighlight = actionEvent -> {
+                labelBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, new CornerRadii(0), Insets.EMPTY)));
+                resultBox.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, new CornerRadii(0), Insets.EMPTY)));
+                // labelBox.setPadding(new Insets(0));
+                // resultBox.setPadding(new Insets(0));
+            };
+            labelBox.setOnMouseEntered(highlight);
+            labelBox.setOnMouseExited(dehighlight);
+            resultBox.setOnMouseEntered(highlight);
+            resultBox.setOnMouseExited(dehighlight);
+
+            lines.getChildren().add(labelBox);
+            results.getChildren().add(resultBox);
 
             if (interpretEvent.open) {
                 indent++;

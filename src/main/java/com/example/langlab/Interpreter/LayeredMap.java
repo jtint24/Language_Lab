@@ -52,8 +52,13 @@ public class LayeredMap<T, U> {
     }
 
     public HashMap<T, U> toHashMap() {
+        return toHashMap(layers.size());
+    }
+
+    public HashMap<T, U> toHashMap(int start) {
         HashMap<T, U> retMap = new HashMap<>();
-        for (HashMap<T, U> layer : layers) {
+        for (int i = 0; i<layers.size()-start; i++) {
+            HashMap<T, U> layer = layers.get(i);
             retMap.putAll(layer);
         }
         return retMap;
