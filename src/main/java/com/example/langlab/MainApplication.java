@@ -26,6 +26,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainApplication extends Application {
     public static final Color BG_GRAY = Color.gray(0.05);
     public static final Color FG_GRAY = Color.gray(0.2);
@@ -61,11 +64,14 @@ public class MainApplication extends Application {
         lexemes = new SymbolString();
         headPtn = null;
         ast = null;
+        interpreter = null;
 
         Tokenizer tokenizer = new Tokenizer(new InputBuffer(program, errorManager), errorManager);
         try {
             lexemes = tokenizer.extractAllSymbols();
-        } catch (RuntimeException ignored) {
+        } catch (Exception ignored) {
+            System.out.println("Caught exception");
+            refresh(false);
             return;
         }
         System.out.println(lexemes);
@@ -75,7 +81,8 @@ public class MainApplication extends Application {
         try {
             parser.setSymbols(lexemes.toList());
             NonterminalLibrary.file.apply(parser);
-        } catch (RuntimeException ignored) {
+        } catch (Exception ignored) {
+            refresh(false);
             return;
         }
         headPtn = parser.buildTree();
@@ -90,26 +97,72 @@ public class MainApplication extends Application {
 
         try {
             errorManager.logErrors(validationContext.getErrors());
-        } catch (RuntimeException ignored) {
+        } catch (Exception ignored) {
+            ast = expr;
+            refresh(false);
             return;
         }
+        ast = expr;
 
         errorManager.printErrors(true);
 
-        ast = expr;
         System.out.println("Ast: \n"+expr);
 
         interpreter = new Interpreter(expr, errorManager);
         // interpreter.run();
 
-        refresh();
+        refresh(false);
     }
 
-    public void refresh() {
+    public Color getTabColor(HashMap<Error.ErrorType, Boolean> errorTypes, Error.ErrorType errorType) {
+        if (errorTypes.containsKey(errorType)) {
+            if (!errorTypes.get(errorType)) {
+                return Color.YELLOW;
+            } else if (errorTypes.get(errorType)) {
+                return Color.RED;
+            }
+        }
+        for (Error.ErrorType otherType : Error.ErrorType.values()) {
+            if (otherType.ordinal() < errorType.ordinal() && errorTypes.containsKey(otherType) && errorTypes.get(otherType)) {
+                return Color.GRAY;
+            }
+        }
+        return Color.GREEN;
+    }
+
+    public void refresh(boolean first) {
+        Text lexerLabel = new Text("Lexer");
+        Text parserLabel = new Text("Parser");
+        Text semanticLabel = new Text("Semantics");
+        Text executionLabel = new Text("Execution");
+
+
+        if (!first) {
+            HashMap<Error.ErrorType, Boolean> errorLevels = errorManager.getPresentErrorTypes();
+            for (Map.Entry<Error.ErrorType, Boolean> errorLevel : errorLevels.entrySet()) {
+                System.out.println(errorLevel.getKey()+"\t"+errorLevel.getValue());
+            }
+
+            lexerLabel.setFill(getTabColor(errorLevels, Error.ErrorType.LEXER_ERROR));
+            parserLabel.setFill(getTabColor(errorLevels, Error.ErrorType.PARSER_ERROR));
+            semanticLabel.setFill(getTabColor(errorLevels, Error.ErrorType.INTERPRETER_ERROR));
+            executionLabel.setFill(getTabColor(errorLevels, Error.ErrorType.RUNTIME_ERROR));
+        } else {
+            lexerLabel.setFill(Color.WHITE);
+            parserLabel.setFill(Color.WHITE);
+            semanticLabel.setFill(Color.WHITE);
+            executionLabel.setFill(Color.WHITE);
+        }
+
         lexerTab.setContent(lexView());
         parserTab.setContent(parseView());
         semanticsTab.setContent(semanticsView());
         executionTab.setContent(executionView());
+
+        lexerTab.setGraphic(lexerLabel);
+        parserTab.setGraphic(parserLabel);
+        semanticsTab.setGraphic(semanticLabel);
+        executionTab.setGraphic(executionLabel);
     }
 
     public Parent mainView() {
@@ -119,29 +172,31 @@ public class MainApplication extends Application {
         codeTab.setClosable(false);
 
         lexerTab = new Tab();
-        lexerTab.setText("Lexer");
-        lexerTab.setContent(lexView());
+        lexerTab.setText("");
+        // lexerTab.setContent(lexView());
         lexerTab.setClosable(false);
 
         parserTab = new Tab();
-        parserTab.setText("Parser");
-        parserTab.setContent(parseView());
+        parserTab.setText("");
+        // parserTab.setContent(parseView());
         parserTab.setClosable(false);
 
         semanticsTab = new Tab();
-        semanticsTab.setText("Semantics");
-        semanticsTab.setContent(semanticsView());
+        semanticsTab.setText("");
+        // semanticsTab.setContent(semanticsView());
         semanticsTab.setClosable(false);
 
         executionTab = new Tab();
-        executionTab.setText("Execution");
-        executionTab.setContent(executionView());
+        executionTab.setText("");
+        // executionTab.setContent(executionView());
         executionTab.setClosable(false);
 
         TabPane mainPane = new TabPane(codeTab, lexerTab, parserTab);
         mainPane.setBackground(new Background(
                 new BackgroundFill(BG_GRAY, CornerRadii.EMPTY, Insets.EMPTY)
         ));
+
+        refresh(true);
 
         return new TabPane(codeTab, lexerTab, parserTab, semanticsTab, executionTab);
     }
@@ -169,18 +224,18 @@ public class MainApplication extends Application {
         Button runButton = new Button("Run");
         runButton.setOnAction(actionEvent -> {
             interpreter.run();
-            refresh();
+            refresh(false);
         });
         Button stepButton = new Button("Step");
         stepButton.setOnAction(actionEvent -> {
             interpreter.step();
-            refresh();
+            refresh(false);
         });
         Button restartButton = new Button("Restart");
         restartButton.setOnAction(actionEvent -> {
             System.out.println("restart ->");
             interpreter = new Interpreter(ast, errorManager);
-            refresh();
+            refresh(false);
         });
 
         HBox buttonsBox = new HBox();

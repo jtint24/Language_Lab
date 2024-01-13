@@ -36,8 +36,8 @@ public class Error {
     }
 
     public enum ErrorType {
-        LEXER_ERROR,
         INPUT_ERROR,
+        LEXER_ERROR,
         PARSER_ERROR,
         INTERPRETER_ERROR,
         RUNTIME_ERROR

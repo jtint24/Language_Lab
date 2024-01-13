@@ -4,6 +4,7 @@ package com.example.langlab.ErrorManager;
 import com.example.langlab.IO.OutputBuffer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ErrorManager {
@@ -73,5 +74,15 @@ public class ErrorManager {
             ret.append(error.toString());
         }
         return ret.toString();
+    }
+
+    public HashMap<Error.ErrorType, Boolean> getPresentErrorTypes() {
+        HashMap<Error.ErrorType, Boolean> errorTypes = new HashMap<>();
+        for (Error error : errors) {
+            if (!errorTypes.getOrDefault(error.type, false)) {
+                errorTypes.put(error.type, error.getIsFatal());
+            }
+        }
+        return errorTypes;
     }
 }

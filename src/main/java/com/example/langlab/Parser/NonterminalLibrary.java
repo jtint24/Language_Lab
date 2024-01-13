@@ -1,5 +1,6 @@
 package com.example.langlab.Parser;
 
+import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
 
@@ -146,6 +147,8 @@ public class NonterminalLibrary {
                 assignment.apply(parser);
             } else if (parser.at(TokenLibrary.identifier)) {
                 parser.eat(TokenLibrary.identifier);
+            } else {
+                parser.advanceWithError(new Error(Error.ErrorType.PARSER_ERROR, "Malformed expression", true, 0));
             }
 
             parser.eat(TokenLibrary.whitespace);

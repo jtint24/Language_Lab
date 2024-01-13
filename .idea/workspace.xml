@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add better string conversion for binary operators">
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="condense interpreter output">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expressions/AssignmentExpression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expressions/AssignmentExpression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/Error.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/ErrorManager/ErrorManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Parser/NonterminalLibrary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -98,7 +100,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="82390000" />
+      <workItem from="1704922119142" duration="85993000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -219,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705102723430</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="condense interpreter output">
+      <created>1705111652463</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1705111652463</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +252,7 @@
     <MESSAGE value="add stepping through interpretation" />
     <MESSAGE value="add stepping for binary expressions" />
     <MESSAGE value="add better string conversion for binary operators" />
-    <option name="LAST_COMMIT_MESSAGE" value="add better string conversion for binary operators" />
+    <MESSAGE value="condense interpreter output" />
+    <option name="LAST_COMMIT_MESSAGE" value="condense interpreter output" />
   </component>
 </project>
