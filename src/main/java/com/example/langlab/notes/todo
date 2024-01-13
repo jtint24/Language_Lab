@@ -1,8 +1,8 @@
 
  - [ ] Add the four basic operators
- - [ ] Add interpreter sidebar with console and memory
- - [ ] Add print function
  - [ ] Add a visual separator or highlight to the lines in the execution view
+ - [x] Add interpreter sidebar with console and memory
+ - [x] Add print function
  - [x] Add background to fail screen on parser and execution tabs
  - [x] Make the tabs grey out when you handle errors
  - [x] Fix error where interpreter doesn't clear after failed runs

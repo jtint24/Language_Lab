@@ -42,6 +42,9 @@ public class ExpressionBuilder {
                 case "Binary Expression" -> {
                     return buildBinaryExpression((NonterminalParseTreeNode) ptn);
                 }
+                case "Expression Call" -> {
+                    return buildExpressionCall((NonterminalParseTreeNode) ptn);
+                }
                 case "Statement", "Expression", "Delimited Expression" -> {
                     return unwrap((NonterminalParseTreeNode) ptn);
                 }
@@ -49,6 +52,18 @@ public class ExpressionBuilder {
         }
 
         return null;
+    }
+
+    private static Expression buildExpressionCall(NonterminalParseTreeNode ptn) {
+        ParseTreeNode funcNode = ptn.getChildren().get(0);
+        NonterminalParseTreeNode argumentList = (NonterminalParseTreeNode) ptn.getChildren().get(2);
+        ArrayList<Expression> subExpressions = new ArrayList<>();
+        for (ParseTreeNode argumentChild : argumentList.getChildren()) {
+            if (argumentChild instanceof NonterminalParseTreeNode) {
+                subExpressions.add(convert(argumentChild));
+            }
+        }
+        return new FunctionExpression(convert(funcNode), subExpressions);
     }
 
     private static Expression buildIntExpression(String lexeme) {

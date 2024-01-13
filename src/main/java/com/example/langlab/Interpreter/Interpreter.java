@@ -1,6 +1,7 @@
 package com.example.langlab.Interpreter;
 
 import com.example.langlab.ErrorManager.ErrorManager;
+import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expressions.Expression;
 import com.example.langlab.MainApplication;
 import javafx.scene.Node;
@@ -17,14 +18,16 @@ public class Interpreter {
     Expression cursorExpression;
     State state;
     ArrayList<InterpretEvent> events;
+    OutputBuffer outputBuffer;
 
-    public Interpreter(Expression headExpression, ErrorManager errorManager) {
+    public Interpreter(Expression headExpression, ErrorManager errorManager, OutputBuffer outputBuffer) {
         this.headExpression = headExpression;
-        this.state = new State(errorManager);
+        this.state = new State(errorManager, outputBuffer);
         this.cursorExpression = headExpression;
         this.events = new ArrayList<>() {{
             add(new InterpretEvent(headExpression, true, null));
         }};
+        this.outputBuffer = outputBuffer;
     }
     public void step() {
         ExpressionResult result = cursorExpression.evaluate(state);

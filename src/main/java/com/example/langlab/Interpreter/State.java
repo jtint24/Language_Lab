@@ -4,6 +4,7 @@ import com.example.langlab.Elements.Type;
 import com.example.langlab.Elements.Value;
 import com.example.langlab.Elements.ValueLibrary;
 import com.example.langlab.ErrorManager.ErrorManager;
+import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.Expressions.Expression;
 
 import java.util.ArrayList;
@@ -14,13 +15,15 @@ public class State {
     public HashMap<Expression, Value> callResults = new HashMap<>();
     public LayeredMap<String, Value> variables = new LayeredMap<>(true);
     public ErrorManager errorManager;
+    public OutputBuffer outputBuffer;
 
-    public State(ErrorManager errorManager) {
+    public State(ErrorManager errorManager, OutputBuffer outputBuffer) {
         variables.addLayer();
         for (Map.Entry<String, Value> builtin : ValueLibrary.builtins.entrySet()) {
             variables.put(builtin.getKey(), builtin.getValue());
         }
         this.errorManager = errorManager;
+        this.outputBuffer = outputBuffer;
     }
 
     public ArrayList<MemoryEntry> getMemoryEntries() {

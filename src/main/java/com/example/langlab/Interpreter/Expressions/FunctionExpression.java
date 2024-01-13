@@ -41,7 +41,7 @@ public class FunctionExpression extends Expression {
             inputValues[i] = s.callResults.get(inputExpressions.get(i));
         }
 
-        Value returnValue = function.apply(inputValues, s.errorManager);
+        Value returnValue = function.apply(inputValues, s.errorManager, s.outputBuffer);
 
         for (Expression inputExpression : inputExpressions) {
             s.callResults.remove(inputExpression);

@@ -1,12 +1,13 @@
 package com.example.langlab.Elements;
 
 import com.example.langlab.ErrorManager.ErrorManager;
+import com.example.langlab.IO.OutputBuffer;
 import com.example.langlab.Interpreter.LayeredMap;
 
 import java.util.HashMap;
 
 public class ValueLibrary {
-    public static Type intType = new Type("int") {
+    public static Type intType = new Type("Int") {
         @Override
         public boolean matchesValue(Value v) {
             return v instanceof ValueWrapper && (((ValueWrapper<?>) v).wrappedValue) instanceof Integer;
@@ -14,13 +15,23 @@ public class ValueLibrary {
 
         @Override
         public boolean subTypeOf(Type type) {
+            return type == this || type == anyType;
+        }
+    };
+    public static Type anyType = new Type("Any") {
+        @Override
+        public boolean matchesValue(Value v) {
+            return true;
+        }
+        @Override
+        public boolean subTypeOf(Type type) {
             return type == this;
         }
     };
-    public static Type voidType = new Type("void") {
+    public static Type voidType = new Type("Void") {
         @Override
         public boolean matchesValue(Value v) {
-            return false;
+            return v == voidResult;
         }
 
         @Override
@@ -30,7 +41,7 @@ public class ValueLibrary {
     };
     public static Function plusOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
         @Override
-        public Value prevalidatedApply(Value[] args, ErrorManager errorManager) {
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
             Value leftVal = args[0];
             Value rightVal = args[1];
             int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
@@ -39,8 +50,24 @@ public class ValueLibrary {
             return new ValueWrapper<>(intType, left+right);
         }
     };
+    public static Function printlnFunction = new Function(new FunctionType(voidType, anyType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
+            outputBuffer.println(args[0]);
+            return voidResult;
+        }
+    };
+    public static Function printFunction = new Function(new FunctionType(voidType, anyType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
+            outputBuffer.print(args[0]);
+            return voidResult;
+        }
+    };
     public static HashMap<String,Value> builtins = new HashMap<>() {{
         put("+", plusOperator);
+        put("println", printlnFunction);
+        put("print", printFunction);
     }};
     public static Value voidResult = new VoidValue();
 }

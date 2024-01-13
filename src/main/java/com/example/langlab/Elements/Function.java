@@ -2,6 +2,7 @@ package com.example.langlab.Elements;
 
 import com.example.langlab.ErrorManager.Error;
 import com.example.langlab.ErrorManager.ErrorManager;
+import com.example.langlab.IO.OutputBuffer;
 
 abstract public class Function extends Value {
     FunctionType type;
@@ -9,7 +10,7 @@ abstract public class Function extends Value {
         this.type = type;
     }
 
-    public Value apply(Value[] args, ErrorManager errorManager) {
+    public Value apply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
         if (args.length != type.parameterTypes.length) {
             errorManager.logError(new Error(Error.ErrorType.RUNTIME_ERROR, "Expected "+type.parameterTypes.length+" args, got "+args.length, true, 0));
         }
@@ -18,14 +19,14 @@ abstract public class Function extends Value {
                 errorManager.logError(new Error(Error.ErrorType.RUNTIME_ERROR, "Expected "+ type.parameterTypes[i] +", got "+args[i].type, true, 0));
             }
         }
-        Value result = prevalidatedApply(args, errorManager);
+        Value result = prevalidatedApply(args, errorManager, outputBuffer);
         if (!type.returnType.matchesValue(result)) {
             errorManager.logError(new Error(Error.ErrorType.RUNTIME_ERROR, "Expected "+type.returnType+" return type, got "+result.getType(), true, 0));
         }
         return result;
     }
 
-    public abstract Value prevalidatedApply(Value[] args, ErrorManager errorManager);
+    public abstract Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer);
 
     @Override
     public FunctionType getType() {
