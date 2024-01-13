@@ -66,7 +66,7 @@ public class MainApplication extends Application {
     }
 
     public void runInterpretation(String program) {
-        out = new OutputBuffer();
+        out.clear();
         errorManager = new ErrorManager(out);
         lexemes = new SymbolString();
         headPtn = null;
@@ -244,6 +244,7 @@ public class MainApplication extends Application {
         Button restartButton = new Button("Restart");
         restartButton.setOnAction(actionEvent -> {
             System.out.println("restart ->");
+            out.clear();
             interpreter = new Interpreter(ast, errorManager, out);
             refresh(false);
         });

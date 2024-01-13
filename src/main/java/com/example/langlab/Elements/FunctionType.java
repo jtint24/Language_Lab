@@ -31,12 +31,7 @@ public class FunctionType extends Type {
     @Override
     public boolean matchesValue(Value v) {
         if (v instanceof Function) {
-            Function fv = (Function) v;
-            // TODO
-
-            return true;
-
-
+            return subTypeOf(v.type);
         } else {
             return false;
         }
@@ -44,6 +39,19 @@ public class FunctionType extends Type {
 
     @Override
     public boolean subTypeOf(Type type) {
-        return false;
+        if (type == ValueLibrary.anyType) {
+            return true;
+        }
+        if (type instanceof FunctionType) {
+            FunctionType ft = (FunctionType) type;
+            for (int i = 0; i<parameterTypes.length; i++) {
+                if (!parameterTypes[i].subTypeOf(ft.parameterTypes[i])) {
+                    return false;
+                }
+            }
+            return returnType.subTypeOf(ft.returnType);
+        } else {
+            return false;
+        }
     }
 }

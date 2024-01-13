@@ -26,6 +26,9 @@ public class OutputBuffer {
             new Exception().printStackTrace();
         }
     }
+    public void clear() {
+        output = "";
+    }
     public void println() {
         println("");
     }
