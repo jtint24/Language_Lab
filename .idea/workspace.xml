@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="add function type conditions">
+    <list default="true" id="9ec29c8b-6210-4298-8991-f9dc2691c5ad" name="Changes" comment="improve fit for tableview in the execution view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Elements/ValueLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Interpreter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/LayeredMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expressions/ExpressionBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Interpreter/Expressions/ExpressionBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/Lexer/TokenLibrary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/langlab/notes/todo" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +99,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1704922117873</updated>
-      <workItem from="1704922119142" duration="100431000" />
+      <workItem from="1704922119142" duration="102204000" />
     </task>
     <task id="LOCAL-00001" summary="add parse tree view">
       <created>1704994497163</created>
@@ -258,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705122466055</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="improve fit for tableview in the execution view">
+      <created>1705169950009</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1705169950009</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -298,6 +302,7 @@
     <MESSAGE value="add console/memory sidebar" />
     <MESSAGE value="add print function" />
     <MESSAGE value="add function type conditions" />
-    <option name="LAST_COMMIT_MESSAGE" value="add function type conditions" />
+    <MESSAGE value="improve fit for tableview in the execution view" />
+    <option name="LAST_COMMIT_MESSAGE" value="improve fit for tableview in the execution view" />
   </component>
 </project>

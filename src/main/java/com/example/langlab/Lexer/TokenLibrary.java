@@ -13,7 +13,10 @@ public class TokenLibrary {
                 identifier,
                 var,
                 ret,
-                PLUS_TOKEN_TYPE,
+                plus,
+                div,
+                mult,
+                sub,
                 equals,
                 lParen,
                 rParen,
@@ -102,7 +105,11 @@ public class TokenLibrary {
             Color.rgb(10, 120, 200)
     );
 
-    public static final TokenType PLUS_TOKEN_TYPE = new TokenType(
+    public static final TokenType div = fromString("/", Color.rgb(200, 100, 30)).toBinder(new BindingPowers(PrecedenceLevel.MULTIPLICATION, Associativity.LEFT));
+    public static final TokenType mult = fromString("*", Color.rgb(200, 100, 30)).toBinder(new BindingPowers(PrecedenceLevel.MULTIPLICATION, Associativity.LEFT));
+    public static final TokenType sub = fromString("-", Color.rgb(200, 100, 30)).toBinder(new BindingPowers(PrecedenceLevel.ADDITION, Associativity.LEFT));
+
+    public static final TokenType plus = new TokenType(
             "+",
             (String lexeme) -> {
                 return lexeme.equals("+");

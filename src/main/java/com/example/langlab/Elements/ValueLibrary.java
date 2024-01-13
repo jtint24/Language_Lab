@@ -50,6 +50,39 @@ public class ValueLibrary {
             return new ValueWrapper<>(intType, left+right);
         }
     };
+    public static Function divOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
+            Value leftVal = args[0];
+            Value rightVal = args[1];
+            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+
+            return new ValueWrapper<>(intType, left/right);
+        }
+    };
+    public static Function subOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
+            Value leftVal = args[0];
+            Value rightVal = args[1];
+            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+
+            return new ValueWrapper<>(intType, left-right);
+        }
+    };
+    public static Function multOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+        @Override
+        public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
+            Value leftVal = args[0];
+            Value rightVal = args[1];
+            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+
+            return new ValueWrapper<>(intType, left*right);
+        }
+    };
     public static Function printlnFunction = new Function(new FunctionType(voidType, anyType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
@@ -66,6 +99,9 @@ public class ValueLibrary {
     };
     public static HashMap<String,Value> builtins = new HashMap<>() {{
         put("+", plusOperator);
+        put("/", divOperator);
+        put("*", multOperator);
+        put("-", subOperator);
         put("println", printlnFunction);
         put("print", printFunction);
     }};

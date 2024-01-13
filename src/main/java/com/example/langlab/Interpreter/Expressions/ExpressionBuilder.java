@@ -15,12 +15,10 @@ public class ExpressionBuilder {
             String name =  (((TerminalParseTreeNode) ptn).getWrappedToken().getTokenType().getName());
             String lexeme = ((TerminalParseTreeNode) ptn).getWrappedToken().getLexeme();
             switch (name) {
-                case "identifier":
+                case "identifier", "+", "/", "-", "*":
                     return new VariableExpression(lexeme);
                 case "int":
                     return buildIntExpression(lexeme);
-                case "+":
-                    return new VariableExpression("+");
                 default:
                     return null;
             }
