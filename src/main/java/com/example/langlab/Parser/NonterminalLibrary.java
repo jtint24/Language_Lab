@@ -1,8 +1,11 @@
 package com.example.langlab.Parser;
 
 import com.example.langlab.ErrorManager.Error;
+import com.example.langlab.Interpreter.LayeredMap;
 import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
+
+import java.util.HashSet;
 
 public class NonterminalLibrary {
     public static Nonterminal file = new Nonterminal("File", "A nonterminal to capture the whole program") {
@@ -213,5 +216,17 @@ public class NonterminalLibrary {
         @Override
         public void parse(Parser parser) {}
     };
+
+    public static HashSet<Nonterminal> removable = new HashSet<>() {{
+        add(statement);
+        add(fullExpression);
+    }};
+
+    public static HashSet<Nonterminal> statements = new HashSet<>() {{
+        add(assignment);
+        add(varStatement);
+        add(returnStatement);
+        add(statement);
+    }};
 
 }

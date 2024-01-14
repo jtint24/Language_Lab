@@ -19,6 +19,7 @@ import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.Parser;
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -49,8 +50,10 @@ public class MainApplication extends Application {
     OutputBuffer out = new OutputBuffer();
     ErrorManager errorManager = new ErrorManager(out);
     ParseTreeNode headPtn;
+    ParseTreeNode simplifiedHeadPtn;
     Interpreter interpreter;
     Expression ast;
+    boolean simplifyPtn;
     Stage stage;
     Tab codeTab;
     Tab lexerTab;
@@ -69,12 +72,15 @@ public class MainApplication extends Application {
     }
 
     public void runInterpretation(String program) {
+        refresh(true);
+
         out.clear();
         errorManager = new ErrorManager(out);
         lexemes = new SymbolString();
         headPtn = null;
         ast = null;
         interpreter = null;
+
 
         Tokenizer tokenizer = new Tokenizer(new InputBuffer(program, errorManager), errorManager);
         try {
@@ -96,6 +102,7 @@ public class MainApplication extends Application {
             return;
         }
         headPtn = parser.buildTree();
+        simplifiedHeadPtn = headPtn.simplify();
 
 
         headPtn.removeSymbolsOfType(TokenLibrary.whitespace);
@@ -246,7 +253,6 @@ public class MainApplication extends Application {
         });
         Button restartButton = new Button("Restart");
         restartButton.setOnAction(actionEvent -> {
-            System.out.println("restart ->");
             out.clear();
             interpreter = new Interpreter(ast, errorManager, out);
             refresh(false);
@@ -407,8 +413,17 @@ public class MainApplication extends Application {
         mainBox.setAlignment(Pos.CENTER);
         mainBox.setSpacing(15);
 
+        CheckBox checkbox = new CheckBox();
+        checkbox.selectedProperty().set(simplifyPtn);
+        HBox checkboxBox = new HBox(text("Simplify parse tree: "), checkbox);
+        checkbox.setOnAction(actionEvent -> {
+            simplifyPtn = checkbox.isSelected();
+            refresh(false);
+        });
+
         if (headPtn != null) {
-            ScrollPane scroll = new ScrollPane(headPtn.toNode());
+            Node headNode = checkbox.isSelected() ? simplifiedHeadPtn.toNode() : headPtn.toNode();
+            ScrollPane scroll = new ScrollPane(headNode);
             scroll.setBackground(basic_bg);
             scroll.setPannable(true);
             scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -425,6 +440,8 @@ public class MainApplication extends Application {
         if (errorManager.hasErrors(Error.ErrorType.PARSER_ERROR)) {
             mainBox.getChildren().add(text(errorManager.toString()));
         }
+
+        mainBox.getChildren().add(checkboxBox);
 
         mainBox.setAlignment(Pos.TOP_CENTER);
         mainBox.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.NONE, new CornerRadii(0), BorderStroke.THICK)));

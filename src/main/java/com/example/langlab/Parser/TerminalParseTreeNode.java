@@ -46,6 +46,11 @@ public class TerminalParseTreeNode extends ParseTreeNode {
         return "Terminal("+ wrappedToken +")";
     }
 
+    @Override
+    public ParseTreeNode simplify() {
+        return this;
+    }
+
     public Node toNode() {
         if (wrappedToken.getTokenType() == TokenLibrary.whitespace) {
             return new VBox();

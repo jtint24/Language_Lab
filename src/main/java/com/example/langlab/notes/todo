@@ -1,5 +1,6 @@
 
  - [x] Add the four basic operators
+ - [ ] Make negative numbers work
  - [ ] Add some visual indication that the compile button has been pressed
  - [x] Add a visual separator or highlight to the lines in the execution view
  - [x] Add interpreter sidebar with console and memory

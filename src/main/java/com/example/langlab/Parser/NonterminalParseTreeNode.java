@@ -1,5 +1,6 @@
 package com.example.langlab.Parser;
 
+import com.example.langlab.Lexer.TokenLibrary;
 import com.example.langlab.Lexer.TokenType;
 import com.example.langlab.ErrorManager.Error;
 import javafx.geometry.Insets;
@@ -94,6 +95,43 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
         return header + body;
     }
 
+    @Override
+    public ParseTreeNode simplify() {
+
+        if (NonterminalLibrary.removable.contains(this.kind.validTreeType)) {
+            for (ParseTreeNode child : children) {
+                if (!(child instanceof TerminalParseTreeNode && ((TerminalParseTreeNode) child).getWrappedToken().getTokenType() == TokenLibrary.whitespace)) {
+                    return child.simplify();
+                }
+            }
+            return children.get(0).simplify();
+        } else {
+            NonterminalParseTreeNode newPtn = new NonterminalParseTreeNode(kind);
+
+            for (ParseTreeNode child : children) {
+                newPtn.children.add(child.simplify());
+            }
+
+            return newPtn;
+        }
+
+        /*
+        NonterminalParseTreeNode newPtn = new NonterminalParseTreeNode(kind);
+        for (ParseTreeNode child : children) {
+            if (child instanceof NonterminalParseTreeNode) {
+                if (NonterminalLibrary.removable.contains(((NonterminalParseTreeNode) child).kind.validTreeType)) {
+                    for (ParseTreeNode grandchild : ((NonterminalParseTreeNode) child).children) {
+                        newPtn.children.add(grandchild.simplify());
+                    }
+                } else {
+                    newPtn.children.add(child.simplify());
+                }
+            } else {
+                newPtn.children.add(child);
+            }
+        }*/
+    }
+
 
 
     @Override
@@ -124,7 +162,7 @@ public class NonterminalParseTreeNode extends ParseTreeNode {
         Pane childBoxes;
         if (children.stream().anyMatch(
                 parseTreeNode -> parseTreeNode instanceof NonterminalParseTreeNode &&
-                        ((NonterminalParseTreeNode) parseTreeNode).kind.validTreeType == NonterminalLibrary.statement)
+                        NonterminalLibrary.statements.contains(((NonterminalParseTreeNode) parseTreeNode).kind.validTreeType))
         ) {
             VBox vertChildren  = new VBox();
             vertChildren.setSpacing(5);
