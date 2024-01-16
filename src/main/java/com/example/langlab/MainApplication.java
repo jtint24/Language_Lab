@@ -19,7 +19,6 @@ import com.example.langlab.Parser.NonterminalLibrary;
 import com.example.langlab.Parser.ParseTreeNode;
 import com.example.langlab.Parser.Parser;
 import javafx.application.Application;
-import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,6 +26,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -34,10 +36,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
+
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainApplication extends Application {
     public static final Color BG_GRAY = Color.gray(0.05);
@@ -68,6 +75,28 @@ public class MainApplication extends Application {
         stage.setTitle("Language Lab");
         stage.setScene(scene);
         stage.show();
+
+        final Toolkit defaultToolkit = Toolkit.getDefaultToolkit();
+        final URL imageResource = MainApplication.class.getClassLoader().getResource("llicon.png");
+        final Image icon = defaultToolkit.getImage(imageResource);
+
+        try {
+            Taskbar taskbar = Taskbar.getTaskbar();
+            taskbar.setIconImage(icon);
+        } catch (final UnsupportedOperationException e) {
+            //stage.getIcons().add(SwingFXUtils.toFXImage(icon));
+        } catch (final SecurityException e) {
+            System.out.println("There was a security exception for: 'taskbar.setIconImage'");
+        }
+
+        stage.getIcons().add(
+                new javafx.scene.image.Image(
+                        Objects.requireNonNull(
+                                MainApplication.class.getClassLoader().getResourceAsStream("llicon.png")
+                        )
+                )
+        );
+
         this.stage = stage;
     }
 

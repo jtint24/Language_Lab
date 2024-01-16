@@ -1,6 +1,7 @@
 module com.example.langlab {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.langlab to javafx.fxml, javafx.base;
