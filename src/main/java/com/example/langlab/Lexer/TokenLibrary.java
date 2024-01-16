@@ -120,7 +120,7 @@ public class TokenLibrary {
             Color.rgb(200, 100, 30)
     ).toBinder(new BindingPowers(PrecedenceLevel.ADDITION, Associativity.LEFT));
 
-    private static final TokenType FLOAT_TOKEN_TYPE = new TokenType(
+    public static final TokenType FLOAT_TOKEN_TYPE = new TokenType(
             "float",
             (String lexeme) -> {
                 return allIn(lexeme, "1234567890.") && 1 == countOf(lexeme, '.');

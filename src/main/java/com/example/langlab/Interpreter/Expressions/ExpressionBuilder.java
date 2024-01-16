@@ -19,6 +19,8 @@ public class ExpressionBuilder {
                     return new VariableExpression(lexeme);
                 case "int":
                     return buildIntExpression(lexeme);
+                case "float":
+                    return buildFloatExpression(lexeme);
                 default:
                     return null;
             }
@@ -66,6 +68,10 @@ public class ExpressionBuilder {
 
     private static Expression buildIntExpression(String lexeme) {
         return new ValueExpression(new ValueWrapper<>(ValueLibrary.intType, Integer.parseInt(lexeme)));
+    }
+
+    private static Expression buildFloatExpression(String lexeme) {
+        return new ValueExpression(new ValueWrapper<>(ValueLibrary.floatType, Float.valueOf(lexeme)));
     }
 
     private static Expression buildBinaryExpression(NonterminalParseTreeNode ptn) {

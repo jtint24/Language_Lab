@@ -88,7 +88,6 @@ public class MainApplication extends Application {
         } catch (final SecurityException e) {
             System.out.println("There was a security exception for: 'taskbar.setIconImage'");
         }
-
         stage.getIcons().add(
                 new javafx.scene.image.Image(
                         Objects.requireNonNull(
@@ -129,9 +128,10 @@ public class MainApplication extends Application {
         } catch (Exception ignored) {
             refresh(false);
             return;
+        } finally {
+            headPtn = parser.buildTree();
+            simplifiedHeadPtn = headPtn.simplify();
         }
-        headPtn = parser.buildTree();
-        simplifiedHeadPtn = headPtn.simplify();
 
 
         headPtn.removeSymbolsOfType(TokenLibrary.whitespace);

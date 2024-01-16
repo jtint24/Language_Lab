@@ -137,9 +137,13 @@ public class NonterminalLibrary {
     public static Nonterminal delimitedExpression = new Nonterminal("Delimited Expression", "A nonterminal that captures an simple expression without operators") {
         @Override
         public void parse(Parser parser) {
+
             parser.eat(TokenLibrary.whitespace);
             if (parser.at(TokenLibrary.INT_TOKEN_TYPE)) {
+                System.out.println("Check!");
                 parser.eat(TokenLibrary.INT_TOKEN_TYPE);
+            } else if (parser.at(TokenLibrary.FLOAT_TOKEN_TYPE)) {
+                parser.eat(TokenLibrary.FLOAT_TOKEN_TYPE);
             } else if (parser.at(TokenLibrary.stringLiteral)) {
                 parser.eat(TokenLibrary.stringLiteral);
             } else if (parser.at(TokenLibrary.lParen)) {

@@ -15,6 +15,18 @@ public class ValueLibrary {
 
         @Override
         public boolean subTypeOf(Type type) {
+            return type == this || type == anyType || type == floatType;
+        }
+    };
+
+    public static Type floatType = new Type("Float") {
+        @Override
+        public boolean matchesValue(Value v) {
+            return v instanceof ValueWrapper && ((((ValueWrapper<?>) v).wrappedValue) instanceof Float || (((ValueWrapper<?>) v).wrappedValue) instanceof Integer);
+        }
+
+        @Override
+        public boolean subTypeOf(Type type) {
             return type == this || type == anyType;
         }
     };
@@ -39,48 +51,120 @@ public class ValueLibrary {
             return type == this;
         }
     };
-    public static Function plusOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+    public static Function plusOperator = new Function(new BinaryOpFunctionType(floatType, floatType, floatType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
             Value leftVal = args[0];
             Value rightVal = args[1];
-            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
-            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
 
-            return new ValueWrapper<>(intType, left+right);
+            float left;
+
+            if (leftVal.type == intType) {
+                left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            } else {
+                left = ((ValueWrapper<Float>) leftVal).wrappedValue;
+            }
+
+            float right;
+
+            if (rightVal.type == intType) {
+                right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+            } else {
+                right = ((ValueWrapper<Float>) rightVal).wrappedValue;
+            }
+
+            if (left % 1 == 0 && right % 1 == 0) {
+                return new ValueWrapper<>(intType, left+right);
+            } else {
+                return new ValueWrapper<>(floatType, left+right);
+            }
         }
     };
-    public static Function divOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+    public static Function divOperator = new Function(new BinaryOpFunctionType(floatType, floatType, floatType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
             Value leftVal = args[0];
             Value rightVal = args[1];
-            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
-            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
 
-            return new ValueWrapper<>(intType, left/right);
+            float left;
+
+            if (leftVal.type == intType) {
+                left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            } else {
+                left = ((ValueWrapper<Float>) leftVal).wrappedValue;
+            }
+
+            float right;
+
+            if (rightVal.type == intType) {
+                right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+            } else {
+                right = ((ValueWrapper<Float>) rightVal).wrappedValue;
+            }
+
+            if (left % 1 == 0 && right % 1 == 0) {
+                return new ValueWrapper<>(intType, left/right);
+            } else {
+                return new ValueWrapper<>(floatType, left/right);
+            }
         }
     };
-    public static Function subOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+    public static Function subOperator = new Function(new BinaryOpFunctionType(floatType, floatType, floatType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
             Value leftVal = args[0];
             Value rightVal = args[1];
-            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
-            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
 
-            return new ValueWrapper<>(intType, left-right);
+            float left;
+
+            if (leftVal.type == intType) {
+                left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            } else {
+                left = ((ValueWrapper<Float>) leftVal).wrappedValue;
+            }
+
+            float right;
+
+            if (rightVal.type == intType) {
+                right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+            } else {
+                right = ((ValueWrapper<Float>) rightVal).wrappedValue;
+            }
+
+            if (left % 1 == 0 && right % 1 == 0) {
+                return new ValueWrapper<>(intType, left-right);
+            } else {
+                return new ValueWrapper<>(floatType, left-right);
+            }
         }
     };
-    public static Function multOperator = new Function(new BinaryOpFunctionType(intType, intType, intType)) {
+    public static Function multOperator = new Function(new BinaryOpFunctionType(floatType, floatType, floatType)) {
         @Override
         public Value prevalidatedApply(Value[] args, ErrorManager errorManager, OutputBuffer outputBuffer) {
             Value leftVal = args[0];
             Value rightVal = args[1];
-            int left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
-            int right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
 
-            return new ValueWrapper<>(intType, left*right);
+            float left;
+
+            if (leftVal.type == intType) {
+                left = ((ValueWrapper<Integer>) leftVal).wrappedValue;
+            } else {
+                left = ((ValueWrapper<Float>) leftVal).wrappedValue;
+            }
+
+            float right;
+
+            if (rightVal.type == intType) {
+                right = ((ValueWrapper<Integer>) rightVal).wrappedValue;
+            } else {
+                right = ((ValueWrapper<Float>) rightVal).wrappedValue;
+            }
+
+            if (left % 1 == 0 && right % 1 == 0) {
+                return new ValueWrapper<>(intType, left*right);
+            } else {
+                return new ValueWrapper<>(floatType, left*right);
+            }
         }
     };
     public static Function printlnFunction = new Function(new FunctionType(voidType, anyType)) {
